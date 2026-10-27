@@ -226,7 +226,7 @@
 
   <script>
     // Укажите прямую ссылку на PDF-файл:
-    const PDF_URL = "https://malikgazetdinov.github.io/file.pdf";
+    const PDF_URL = "https://drive.google.com/file/d/1D0Danhw_VNziRpdBKQ5w242yoSgw5PQ6/preview";
 
     pdfjsLib.GlobalWorkerOptions.workerSrc =
       "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
@@ -298,7 +298,7 @@
     }
 
     async function loadBook() {
-      if (PDF_URL === "https://malikgazetdinov.github.io/file.pdf") {
+      if (PDF_URL === "https://drive.google.com/file/d/1D0Danhw_VNziRpdBKQ5w242yoSgw5PQ6/preview") {
         setStatus("Сначала замените PDF_URL в коде на ссылку на ваш PDF-файл.", true);
         pageInfo.textContent = "Нет PDF";
         return;
