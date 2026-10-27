@@ -298,11 +298,6 @@
     }
 
     async function loadBook() {
-      if (PDF_URL === "https://drive.google.com/file/d/1D0Danhw_VNziRpdBKQ5w242yoSgw5PQ6/preview") {
-        setStatus("Сначала замените PDF_URL в коде на ссылку на ваш PDF-файл.", true);
-        pageInfo.textContent = "Нет PDF";
-        return;
-      }
 
       try {
         const pdf = await pdfjsLib.getDocument({
