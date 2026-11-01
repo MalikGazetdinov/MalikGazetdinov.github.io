@@ -1,360 +1,210 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Книга ан-Нур</title>
-
-  <!-- PDF.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <!-- StPageFlip -->
-  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+  <title>Просмотр PDF</title>
 
   <style>
-    :root {
-      --dark-green: #36533c;
-      --paper: #fffdf6;
-    }
-
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
       min-height: 100vh;
-      color: #27352a;
-      font-family: Georgia, "Times New Roman", serif;
-      background: radial-gradient(ellipse at top, #faf8ef 0%, #e8e5d9 58%, #d5d3c8 100%);
-    }
-
-    header {
-      padding: 24px 16px 10px;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      color: var(--dark-green);
-      font-size: clamp(27px, 5vw, 42px);
-      font-weight: normal;
-      letter-spacing: 2px;
-    }
-
-    header p {
-      margin: 8px 0 0;
-      color: #687568;
-      font-style: italic;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: #202124;
+      color: #fff;
+      font: 16px Arial, sans-serif;
     }
 
     main {
-      width: min(100%, 1100px);
-      margin: 0 auto;
-      padding: 20px 16px 34px;
-    }
-
-    .reader {
-      display: flex;
-      min-height: 520px;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    #book { margin: auto; }
-
-    .page {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: var(--paper);
-      box-shadow: inset 0 0 18px rgba(91, 73, 42, .08);
-    }
-
-    .page canvas {
-      display: block;
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: fill;
-      background: white;
-    }
-
-    /* Обложка */
-    .cover {
-      flex-direction: column;
-      padding: 28px;
-      color: #304b34;
+      width: min(100%, 1000px);
       text-align: center;
-      background:
-        radial-gradient(ellipse at 25% 20%, rgba(255,255,255,.42), transparent 42%),
-        radial-gradient(ellipse at 80% 80%, rgba(75,103,65,.16), transparent 45%),
-        repeating-linear-gradient(8deg, rgba(255,255,255,.035) 0 2px, rgba(70,90,57,.025) 2px 4px),
-        linear-gradient(135deg, #c9dfb7, #a9ca94 55%, #bed8a9);
-      border: 9px solid #8eaa79;
-      outline: 1px solid rgba(255,255,255,.7);
-      outline-offset: -16px;
     }
 
-    .cover::before,
-    .cover::after {
-      position: absolute;
-      content: "";
-      pointer-events: none;
+    #status {
+      margin-bottom: 16px;
+      color: #ddd;
     }
 
-    .cover::before {
-      inset: 13px;
-      border: 1px solid rgba(255,255,255,.58);
+    #viewer {
+      min-height: 70vh;
+      display: grid;
+      place-items: center;
     }
 
-    .cover::after {
-      inset: 22px;
-      border: 1px solid rgba(71,101,61,.25);
-    }
-
-    .cover-ornament {
-      margin-bottom: 30px;
-      color: #718b5e;
-      font-size: 28px;
-    }
-
-    .cover h2 {
-      margin: 0;
-      color: #304b34;
-      font-size: clamp(34px, 6vw, 54px);
-      font-weight: normal;
-      letter-spacing: 3px;
-      text-shadow: 0 1px rgba(255,255,255,.65);
-    }
-
-    .cover .subtitle {
-      max-width: 240px;
-      margin-top: 22px;
-      color: #526b4d;
-      font-size: 16px;
-      line-height: 1.6;
-      font-style: italic;
-    }
-
-    .cover .bottom-ornament {
-      position: absolute;
-      bottom: 42px;
-      color: #718b5e;
-      font-size: 23px;
+    #viewer canvas {
+      display: block;
+      max-width: 100%;
+      max-height: 78vh;
+      height: auto;
+      box-shadow: 0 4px 24px #0008;
+      background: white;
     }
 
     .controls {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
       justify-content: center;
-      gap: 12px;
-      margin-top: 20px;
+      align-items: center;
+      gap: 16px;
+      margin-top: 16px;
     }
 
     button {
-      min-width: 112px;
-      padding: 11px 18px;
-      border: 1px solid #718b68;
-      border-radius: 24px;
-      color: #fff;
-      background: var(--dark-green);
-      font: inherit;
+      padding: 10px 18px;
+      border: 0;
+      border-radius: 6px;
       cursor: pointer;
-      transition: background .2s, transform .2s;
-    }
-
-    button:hover:not(:disabled) {
-      background: #4d704f;
-      transform: translateY(-1px);
+      font-size: 16px;
     }
 
     button:disabled {
-      opacity: .42;
-      cursor: not-allowed;
-    }
-
-    #pageInfo {
-      min-width: 110px;
-      color: #4d5b4e;
-      text-align: center;
-      font-size: 15px;
-    }
-
-    #status {
-      min-height: 24px;
-      margin: 14px 0 0;
-      color: #667166;
-      text-align: center;
-      font-size: 14px;
-    }
-
-    #status.error { color: #a33b32; }
-
-    @media (max-width: 600px) {
-      main { padding-inline: 8px; }
-      .reader { min-height: 420px; }
-      button { min-width: 98px; padding: 10px 14px; }
+      opacity: .45;
+      cursor: default;
     }
   </style>
 </head>
-
 <body>
-  <header>
-    <h1>Книга ан-Нур</h1>
-    <p>Листайте страницы, чтобы начать чтение</p>
-  </header>
-
   <main>
-    <div class="reader">
-      <div id="book"></div>
+    <div id="status">Загрузка PDF…</div>
+    <div id="viewer"></div>
+
+    <div class="controls">
+      <button id="prev" disabled>Назад</button>
+      <span id="page-info">— / —</span>
+      <button id="next" disabled>Вперёд</button>
     </div>
-
-    <nav class="controls" aria-label="Управление книгой">
-      <button id="prevBtn" type="button">← Назад</button>
-      <span id="pageInfo">Загрузка…</span>
-      <button id="nextBtn" type="button">Вперёд →</button>
-    </nav>
-
-    <p id="status" role="status">Загружаем книгу…</p>
   </main>
 
+  <!-- PDF.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
   <script>
-    // PDF-файл должен лежать рядом с index.html.
-    const PDF_URL = "./file.pdf";
+    // Вставьте URL веб-приложения Google Apps Script.
+    const PROXY_URL = "https://script.google.com/macros/s/AKfycbwrafLq34jZCWaUTcAucHMGVv8mY_0cOLFOgM3Jt-_oII8cjSp6I8ZS_p-nyCXWUvfI/exec";
 
     pdfjsLib.GlobalWorkerOptions.workerSrc =
       "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
-    const bookElement = document.getElementById("book");
-    const statusElement = document.getElementById("status");
-    const pageInfo = document.getElementById("pageInfo");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
+    const statusEl = document.getElementById("status");
+    const viewerEl = document.getElementById("viewer");
+    const pageInfoEl = document.getElementById("page-info");
+    const prevButton = document.getElementById("prev");
+    const nextButton = document.getElementById("next");
 
-    let pageFlip = null;
+    let pdf = null;
+    let pageNumber = 1;
+    let rendering = false;
+    let renderAgain = false;
 
-    function setStatus(message, isError = false) {
-      statusElement.textContent = message;
-      statusElement.classList.toggle("error", isError);
-    }
-
-    function updateControls() {
-      if (!pageFlip) return;
-
-      const current = pageFlip.getCurrentPageIndex();
-      const total = pageFlip.getPageCount();
-
-      pageInfo.textContent = `${current + 1} / ${total}`;
-      prevBtn.disabled = current <= 0;
-      nextBtn.disabled = current >= total - 1;
-    }
-
-    function makeCover() {
-      const cover = document.createElement("div");
-      cover.className = "page cover";
-      cover.innerHTML = `
-        <div class="cover-ornament">❧</div>
-        <h2>ан-Нур</h2>
-        <div class="subtitle">Свет, который озаряет сердце и разум</div>
-        <div class="bottom-ornament">✦</div>
-      `;
-      return cover;
-    }
-
-    async function renderPdfPage(pdf, pageNumber, width, height) {
-      const pdfPage = await pdf.getPage(pageNumber);
-      const baseViewport = pdfPage.getViewport({ scale: 1 });
-
-      // Math.max заполняет область целиком; лишнее по краям обрезается.
-      const scale = Math.max(
-        width / baseViewport.width,
-        height / baseViewport.height
-      );
-
-      const viewport = pdfPage.getViewport({ scale });
-      const canvas = document.createElement("canvas");
-      const context = canvas.getContext("2d", { alpha: false });
-      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-
-      canvas.width = Math.floor(viewport.width * pixelRatio);
-      canvas.height = Math.floor(viewport.height * pixelRatio);
-
-      await pdfPage.render({
-        canvasContext: context,
-        viewport,
-        transform: pixelRatio !== 1
-          ? [pixelRatio, 0, 0, pixelRatio, 0, 0]
-          : null
-      }).promise;
-
-      const pageElement = document.createElement("div");
-      pageElement.className = "page";
-      pageElement.appendChild(canvas);
-
-      return pageElement;
-    }
-
-    async function loadBook() {
+    async function loadPdf() {
       try {
-        const pdf = await pdfjsLib.getDocument({
-          url: PDF_URL,
-          withCredentials: false
-        }).promise;
-
-        const totalPdfPages = pdf.numPages;
-        const isMobile = window.innerWidth < 650;
-        const pageWidth = isMobile ? 300 : 410;
-        const pageHeight = isMobile ? 420 : 560;
-
-        const pages = [makeCover()];
-
-        for (let number = 1; number <= totalPdfPages; number++) {
-          setStatus(`Подготавливаем страницы: ${number} из ${totalPdfPages}…`);
-          pages.push(await renderPdfPage(pdf, number, pageWidth, pageHeight));
+        if (!PROXY_URL.startsWith("https://")) {
+          throw new Error("Укажите URL веб-приложения Apps Script в PROXY_URL.");
         }
 
-        pageFlip = new St.PageFlip(bookElement, {
-          width: pageWidth,
-          height: pageHeight,
-          size: "stretch",
-          minWidth: 260,
-          maxWidth: 820,
-          minHeight: 360,
-          maxHeight: 1120,
-          showCover: true,
-          usePortrait: true,
-          drawShadow: true,
-          flippingTime: 850,
-          maxShadowOpacity: 0.35,
-          mobileScrollSupport: false
-        });
+        const response = await fetch(PROXY_URL);
 
-        pageFlip.loadFromHTML(pages);
-        pageFlip.on("flip", updateControls);
-        pageFlip.on("init", updateControls);
+        if (!response.ok) {
+          throw new Error(`Сервер вернул ошибку HTTP ${response.status}.`);
+        }
 
-        setStatus("Готово. Листайте книгу мышью, пальцем или кнопками.");
-        updateControls();
+        const result = await response.json();
+
+        if (!result.base64) {
+          throw new Error(result.error || "Сервер не вернул файл PDF.");
+        }
+
+        const binary = atob(result.base64);
+        const bytes = new Uint8Array(binary.length);
+
+        for (let i = 0; i < binary.length; i++) {
+          bytes[i] = binary.charCodeAt(i);
+        }
+
+        pdf = await pdfjsLib.getDocument({ data: bytes }).promise;
+
+        statusEl.textContent = "";
+        prevButton.disabled = false;
+        nextButton.disabled = false;
+
+        await renderPage();
       } catch (error) {
         console.error(error);
-        setStatus(
-          "Не удалось загрузить PDF. Проверьте, что file.pdf лежит рядом с index.html и доступен по прямой ссылке.",
-          true
-        );
-        pageInfo.textContent = "Ошибка загрузки";
+        statusEl.textContent =
+          "Не удалось загрузить PDF: " + error.message;
       }
     }
 
-    prevBtn.addEventListener("click", () => pageFlip?.flipPrev());
-    nextBtn.addEventListener("click", () => pageFlip?.flipNext());
+    async function renderPage() {
+      if (!pdf) return;
 
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowLeft") pageFlip?.flipPrev();
-      if (event.key === "ArrowRight") pageFlip?.flipNext();
+      if (rendering) {
+        renderAgain = true;
+        return;
+      }
+
+      rendering = true;
+
+      try {
+        const page = await pdf.getPage(pageNumber);
+        const baseViewport = page.getViewport({ scale: 1 });
+        const maxWidth = Math.min(window.innerWidth - 48, 1000);
+        const maxHeight = window.innerHeight * 0.76;
+        const scale = Math.min(
+          maxWidth / baseViewport.width,
+          maxHeight / baseViewport.height
+        );
+
+        const viewport = page.getViewport({ scale });
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+
+        canvas.width = Math.floor(viewport.width);
+        canvas.height = Math.floor(viewport.height);
+
+        viewerEl.replaceChildren(canvas);
+
+        await page.render({
+          canvasContext: context,
+          viewport
+        }).promise;
+
+        pageInfoEl.textContent = `${pageNumber} / ${pdf.numPages}`;
+        prevButton.disabled = pageNumber <= 1;
+        nextButton.disabled = pageNumber >= pdf.numPages;
+      } catch (error) {
+        console.error(error);
+        statusEl.textContent = "Ошибка отображения страницы: " + error.message;
+      } finally {
+        rendering = false;
+
+        if (renderAgain) {
+          renderAgain = false;
+          renderPage();
+        }
+      }
+    }
+
+    prevButton.addEventListener("click", () => {
+      if (pdf && pageNumber > 1) {
+        pageNumber--;
+        renderPage();
+      }
     });
 
-    loadBook();
+    nextButton.addEventListener("click", () => {
+      if (pdf && pageNumber < pdf.numPages) {
+        pageNumber++;
+        renderPage();
+      }
+    });
+
+    window.addEventListener("resize", renderPage);
+
+    loadPdf();
   </script>
 </body>
 </html>
