@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Отчёты о сборе благотворительных средств проекта «Пробуждение уммы».">
+<title>Отчёты о сборе — Пробуждение уммы</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Amiri&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --emerald-950: #06231a;
+  --emerald-900: #0a3024;
+  --emerald-800: #0e4030;
+  --emerald-700: #14523d;
+  --gold-500: #c9a227;
+  --gold-400: #d9b544;
+  --gold-200: #eed9a0;
+  --sand-50: #faf7f0;
+  --sand-100: #f3ede1;
+  --ink-900: #1c2420;
+  --ink-600: #4b5852;
+  --white: #fff;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --shadow-soft: 0 10px 30px rgba(6, 35, 26, .08);
+  --font-display: 'Marcellus', serif;
+  --font-arabic: 'Amiri', serif;
+  --font-body: 'Manrope', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  min-width: 320px;
+  font-family: var(--font-body);
+  color: var(--ink-900);
+  background: var(--sand-50);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+.container {
+  width: min(1000px, 92%);
+  margin-inline: auto;
+}
+
+.pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Cpath d='M40 0L80 40 40 80 0 40Z'/%3E%3Cpath d='M40 14L66 40 40 66 14 40Z'/%3E%3Ccircle cx='40' cy='40' r='6'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 80px 80px;
+}
+
+/* Шапка */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(6, 35, 26, .94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(233, 215, 160, .18);
+}
+
+.header__inner {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--sand-50);
+  text-decoration: none;
+}
+
+.logo__mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid rgba(233, 215, 160, .35);
+  background: linear-gradient(135deg, var(--emerald-700), var(--emerald-900));
+  color: var(--gold-400);
+  font-family: var(--font-arabic);
+  font-size: 1.45rem;
+}
+
+.logo__name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: .03em;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header__nav a {
+  color: rgba(250, 247, 240, .82);
+  text-decoration: none;
+  font-size: .87rem;
+  font-weight: 600;
+  transition: color .2s;
+}
+
+.header__nav a:hover {
+  color: var(--gold-400);
+}
+
+.header__back {
+  color: var(--gold-200);
+  font-size: .85rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.header__back:hover {
+  color: var(--gold-400);
+}
+
+/* Верхний блок страницы */
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  color: var(--sand-50);
+  background:
+    radial-gradient(700px 330px at 85% -15%, rgba(201, 162, 39, .2), transparent 65%),
+    linear-gradient(160deg, var(--emerald-950), var(--emerald-800) 65%, var(--emerald-700));
+}
+
+.page-hero__inner {
+  position: relative;
+  z-index: 1;
+  padding: 66px 0 62px;
+  text-align: center;
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 13px;
+  color: var(--gold-400);
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.kicker::before,
+.kicker::after {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--gold-400);
+}
+
+.page-hero h1 {
+  margin-bottom: 10px;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.page-hero__meta {
+  color: rgba(250, 247, 240, .75);
+  font-size: .9rem;
+}
+
+.page-hero__meta span {
+  padding-inline: 7px;
+  color: var(--gold-400);
+}
+
+/* Основное содержимое */
+main {
+  padding: 44px 0 72px;
+}
+
+.report-section {
+  position: relative;
+  margin-bottom: 22px;
+  padding: 30px;
+  overflow: hidden;
+  border: 1px solid rgba(20, 82, 61, .09);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-soft);
+}
+
+.report-section__heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 17px;
+}
+
+.report-section__number {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  flex: none;
+  border-radius: 50%;
+  background: var(--emerald-800);
+  color: var(--gold-200);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.report-section h2 {
+  padding-top: 3px;
+  color: var(--emerald-950);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.report-section p {
+  margin-bottom: 11px;
+  color: var(--ink-600);
+}
+
+.report-section p:last-child {
+  margin-bottom: 0;
+}
+
+.report-section strong {
+  color: var(--emerald-900);
+}
+
+.report-list {
+  margin: 12px 0 16px;
+  padding-left: 22px;
+  color: var(--ink-600);
+}
+
+.report-list li {
+  margin-bottom: 7px;
+  padding-left: 3px;
+}
+
+.report-list li::marker {
+  color: var(--gold-500);
+}
+
+/* Сводка */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 20px 0 18px;
+}
+
+.stat-card {
+  padding: 19px 12px;
+  text-align: center;
+  border: 1px solid rgba(20, 82, 61, .09);
+  border-radius: var(--radius-md);
+  background: var(--sand-50);
+}
+
+.stat-card__value {
+  color: var(--emerald-800);
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-card__label {
+  margin-top: 4px;
+  color: var(--ink-600);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.report-note {
+  margin-top: 15px;
+  padding: 13px 16px;
+  border-left: 3px solid var(--gold-500);
+  border-radius: 0 10px 10px 0;
+  background: var(--sand-100);
+  color: var(--ink-600);
+  font-size: .9rem;
+}
+
+/* Таблица расходов */
+.table-wrap {
+  width: 100%;
+  margin: 18px 0 8px;
+  overflow-x: auto;
+  border: 1px solid rgba(20, 82, 61, .1);
+  border-radius: var(--radius-md);
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+}
+
+.report-table th,
+.report-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(20, 82, 61, .09);
+  text-align: left;
+  vertical-align: top;
+}
+
+.report-table th {
+  background: var(--sand-100);
+  color: var(--emerald-900);
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.report-table td {
+  color: var(--ink-600);
+  font-size: .9rem;
+}
+
+.report-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.report-table .amount {
+  color: var(--emerald-800);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.blank {
+  color: var(--gold-500);
+  letter-spacing: .04em;
+}
+
+.contact-email {
+  color: var(--emerald-700);
+  font-weight: 700;
+  text-decoration-color: rgba(20, 82, 61, .35);
+  text-underline-offset: 3px;
+}
+
+.contact-email:hover {
+  color: var(--gold-500);
+}
+
+/* Подвал */
+.footer {
+  position: relative;
+  overflow: hidden;
+  padding: 34px 0;
+  border-top: 1px solid rgba(233, 215, 160, .15);
+  background: var(--emerald-950);
+  color: rgba(250, 247, 240, .7);
+  text-align: center;
+  font-size: .83rem;
+}
+
+.footer__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.footer p + p {
+  margin-top: 7px;
+}
+
+.footer strong {
+  color: var(--sand-50);
+}
+
+.footer a {
+  color: var(--gold-200);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: var(--gold-400);
+}
+
+@media (max-width: 700px) {
+  .header__inner {
+    min-height: 64px;
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  .logo__mark {
+    width: 38px;
+    height: 38px;
+  }
+
+  .logo__name {
+    font-size: 1rem;
+  }
+
+  .header__back {
+    font-size: .78rem;
+    text-align: right;
+  }
+
+  .page-hero__inner {
+    padding: 48px 0 44px;
+  }
+
+  main {
+    padding: 28px 0 48px;
+  }
+
+  .report-section {
+    padding: 22px 18px;
+    margin-bottom: 16px;
+  }
+
+  .report-section__heading {
+    gap: 11px;
+  }
+
+  .report-section__number {
+    width: 34px;
+    height: 34px;
+    font-size: .95rem;
+  }
+
+  .report-section h2 {
+    font-size: 1.16rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .stat-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    text-align: left;
+  }
+
+  .stat-card__value {
+    font-size: 1.35rem;
+  }
+
+  .stat-card__label {
+    margin: 0;
+    text-align: right;
+  }
+
+  .table-wrap {
+    overflow: visible;
+    border: 0;
+  }
+
+  .report-table,
+  .report-table tbody,
+  .report-table tr,
+  .report-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .report-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .report-table tr {
+    margin-bottom: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(20, 82, 61, .1);
+    border-radius: 12px;
+    background: var(--white);
+  }
+
+  .report-table td {
+    display: grid;
+    grid-template-columns: minmax(105px, .8fr) 1.2fr;
+    gap: 12px;
+    padding: 11px 13px;
+    border-bottom: 1px solid rgba(20, 82, 61, .08);
+    font-size: .86rem;
+    overflow-wrap: anywhere;
+  }
+
+  .report-table td:last-child {
+    border-bottom: 0;
+  }
+
+  .report-table td::before {
+    content: attr(data-label);
+    color: var(--ink-600);
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container header__inner">
+    <a class="logo" href="index.htm" aria-label="Пробуждение уммы — главная">
+      <span class="logo__mark">☾</span>
+      <span class="logo__name">Пробуждение уммы</span>
+    </a>
+
+    <nav class="header__nav" aria-label="Навигация по странице">
+      <a href="#general">Общие положения</a>
+      <a href="#summary">Сводка</a>
+      <a href="#expenses">Расходы</a>
+    </nav>
+
+    <a class="header__back" href="https://malikgazetdinov.github.io/">← На главную</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="pattern"></div>
+  <div class="container page-hero__inner">
+    <span class="kicker">Прозрачность и отчётность</span>
+    <h1>Отчёты о сборе</h1>
+    <p class="page-hero__meta">
+      Дата публикации: 05.11.2026 <span>·</span> Версия: 1
+    </p>
+  </div>
+</section>
+
+<main class="container">
+
+  <section class="report-section" id="general">
+    <div class="report-section__heading">
+      <span class="report-section__number">01</span>
+      <h2>Общие положения</h2>
+    </div>
+
+    <p>Настоящий документ публикуется организатором проекта «Пробуждение уммы» в целях обеспечения прозрачности сбора благотворительных средств.</p>
+
+    <ul class="report-list">
+      <li><strong>Организатор (получатель пожертвований):</strong> Газетдинов Малик Равилевич</li>
+      <li><strong>ИНН:</strong> 022541182185</li>
+      <li><strong>Почта:</strong> <a class="contact-email" href="mailto:malik.gazetdinot@gmail.com">malik.gazetdinot@gmail.com</a></li>
+      <li><strong>Телефон:</strong> <a class="contact-email" href="tel:+79870472410">+7 (987) 047-24-10</a></li>
+    </ul>
+
+    <p>Средства сбора направляются на распространение книг «Свет», брошюр «Смысл жизни» и иные способы призыва к Исламу.</p>
+    <p>Организатор обновляет информацию на настоящей странице <strong>не реже одного раза в квартал</strong>. Сведения о поступлениях и расходовании средств отражаются по мере их появления.</p>
+  </section>
+
+  <section class="report-section" id="summary">
+    <div class="report-section__heading">
+      <span class="report-section__number">02</span>
+      <h2>Сводка по сбору</h2>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card__value">0 ₽</div>
+        <div class="stat-card__label">Собрано</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__value">0 ₽</div>
+        <div class="stat-card__label">Использовано</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__value">0 ₽</div>
+        <div class="stat-card__label">Остаток</div>
+      </div>
+    </div>
+
+    <p>Количество пожертвований: <strong>0</strong></p>
+    <p>Дата последнего обновления: <strong>05.11.2026</strong></p>
+
+    <div class="report-note">
+      Сбор открыт недавно — показатели будут обновляться по мере поступления и использования средств.
+    </div>
+  </section>
+
+  <section class="report-section" id="expenses">
+    <div class="report-section__heading">
+      <span class="report-section__number">03</span>
+      <h2>Расходование средств по направлениям</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>Направление</th>
+            <th>Сумма расходов</th>
+            <th>Комментарий</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Направление">Печать книг «Свет»</td>
+            <td class="amount" data-label="Сумма расходов"><span class="blank">— ₽</span></td>
+            <td data-label="Комментарий"><span class="blank">—</span></td>
+          </tr>
+          <tr>
+            <td data-label="Направление">Брошюры «Смысл жизни»</td>
+            <td class="amount" data-label="Сумма расходов"><span class="blank">— ₽</span></td>
+            <td data-label="Комментарий"><span class="blank">—</span></td>
+          </tr>
+          <tr>
+            <td data-label="Направление">Иные способы призыва к Исламу</td>
+            <td class="amount" data-label="Сумма расходов"><span class="blank">— ₽</span></td>
+            <td data-label="Комментарий"><span class="blank">—</span></td>
+          </tr>
+          <tr>
+            <td data-label="Направление"><strong>Итого</strong></td>
+            <td class="amount" data-label="Сумма расходов"><strong class="blank">— ₽</strong></td>
+            <td data-label="Комментарий"><span class="blank">—</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="report-note">
+      В таблице отражаются фактически понесённые расходы. Комментарий заполняется организатором по мере появления данных.
+    </div>
+  </section>
+
+  <section class="report-section" id="refunds">
+    <div class="report-section__heading">
+      <span class="report-section__number">04</span>
+      <h2>Возвраты и ошибочные платежи</h2>
+    </div>
+
+    <p>Если платёж прошёл ошибочно или произошло дублирование списания, напишите на
+      <a class="contact-email" href="mailto:malik.gazetdinot@gmail.com">malik.gazetdinot@gmail.com</a>
+      и укажите имя (при наличии), дату и сумму платежа.
+    </p>
+    <p>Сведения о возвратах (при их наличии) отражаются организатором в настоящем отчёте.</p>
+    <p><strong>Просьба не присылать полный номер карты, срок действия или CVC/CVV.</strong></p>
+  </section>
+
+  <section class="report-section" id="changes">
+    <div class="report-section__heading">
+      <span class="report-section__number">05</span>
+      <h2>Изменения</h2>
+    </div>
+
+    <p>О существенных изменениях, касающихся сбора или целей использования средств, организатор сообщает на странице проекта и, при необходимости, в настоящем отчёте.</p>
+    <p>Условия пожертвования размещены на странице проекта и действуют в редакции, опубликованной на дату совершения платежа.</p>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="pattern"></div>
+  <div class="container footer__inner">
+    <p>© 2026 Проект «Пробуждение уммы»</p>
+  </div>
+</footer>
+
+</body>
+</html>
