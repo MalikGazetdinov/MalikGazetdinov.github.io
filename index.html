@@ -4,13 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Садака-джария: помощь в призыве к Исламу — печать и распространение книг и брошюр, цифровые проекты.">
-<title>Свет — проект призыва к Исламу</title>
+<title>Пробуждение уммы — проект призыва к Исламу</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Amiri:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<!-- Стили формы ЮKassa. Сама форма скрыта, внешний вид карточки сайта не меняется. -->
 <link rel="stylesheet" href="https://yookassa.ru/integration/simplepay/css/yookassa_construct_form.css?v=1.35.0">
 
 <style>
@@ -83,7 +81,6 @@ a {
   margin-inline: auto;
 }
 
-/* Геометрический орнамент */
 .pattern {
   position: absolute;
   inset: 0;
@@ -98,7 +95,6 @@ a {
   filter: invert(1);
 }
 
-/* Шапка */
 .header {
   position: sticky;
   top: 0;
@@ -200,6 +196,12 @@ a {
   box-shadow: 0 10px 28px rgba(201, 162, 39, .5);
 }
 
+.btn--gold:disabled {
+  opacity: .7;
+  cursor: wait;
+  transform: none;
+}
+
 .btn--ghost {
   background: transparent;
   color: var(--sand-50);
@@ -229,7 +231,6 @@ a {
   transition: .3s;
 }
 
-/* Мобильная боковая панель */
 .menu-overlay {
   position: fixed;
   inset: 0;
@@ -261,6 +262,7 @@ a {
   transform: translateX(105%);
   visibility: hidden;
   transition: transform .3s ease, visibility .3s ease;
+  overflow-y: auto;
 }
 
 .mobile-menu.is-open {
@@ -314,6 +316,26 @@ a {
   color: var(--gold-400);
 }
 
+.mobile-menu__legal {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 18px 16px;
+  border-top: 1px solid rgba(233, 215, 160, .18);
+  font-size: .88rem;
+}
+
+.mobile-menu__legal a {
+  color: var(--gold-200);
+  text-decoration: none;
+}
+
+.mobile-menu__legal a:hover {
+  color: var(--gold-400);
+  text-decoration: underline;
+}
+
 .mobile-menu__footer {
   margin-top: auto;
   padding-top: 20px;
@@ -323,7 +345,6 @@ a {
   text-align: center;
 }
 
-/* Хиро */
 .hero {
   position: relative;
   overflow: hidden;
@@ -341,13 +362,6 @@ a {
   gap: 56px;
   padding: 96px 0 110px;
   align-items: start;
-}
-
-.hero__bismillah {
-  font-family: var(--font-arabic);
-  font-size: 1.5rem;
-  color: var(--gold-400);
-  margin-bottom: 14px;
 }
 
 .hero__salam {
@@ -423,7 +437,6 @@ a {
   color: var(--gold-400);
 }
 
-/* Карточка сбора */
 .donate-card {
   position: relative;
   z-index: 1;
@@ -544,39 +557,7 @@ a {
   border-color: var(--emerald-800);
 }
 
-.amount-input {
-  width: 100%;
-  padding: 13px 16px;
-  border-radius: 12px;
-  border: 1.5px solid rgba(20, 82, 61, .18);
-  font: inherit;
-  font-weight: 600;
-  color: var(--ink-900);
-  margin-bottom: 14px;
-  outline: none;
-  background: var(--white);
-  transition: border-color .2s;
-}
-
-.amount-input:focus {
-  border-color: var(--gold-500);
-}
-
-.donate-card .btn {
-  width: 100%;
-}
-
-.donate-note {
-  margin-top: 14px;
-  font-size: .76rem;
-  color: var(--ink-600);
-  padding: 10px 12px;
-  background: var(--sand-100);
-  border-radius: 10px;
-  line-height: 1.5;
-}
-
-/* Дополнительное поле имени в стиле существующего поля суммы */
+.amount-input,
 .donor-name-input {
   width: 100%;
   padding: 13px 16px;
@@ -585,12 +566,20 @@ a {
   font: inherit;
   font-weight: 600;
   color: var(--ink-900);
-  margin-bottom: 12px;
   outline: none;
   background: var(--white);
   transition: border-color .2s;
 }
 
+.amount-input {
+  margin-bottom: 14px;
+}
+
+.donor-name-input {
+  margin-bottom: 12px;
+}
+
+.amount-input:focus,
 .donor-name-input:focus {
   border-color: var(--gold-500);
 }
@@ -600,7 +589,6 @@ a {
   color: #87928c;
 }
 
-/* Скрытые служебные элементы формы ЮKassa */
 .yookassa-form-hidden {
   position: absolute !important;
   width: 1px !important;
@@ -613,7 +601,49 @@ a {
   border: 0 !important;
 }
 
-/* Секции */
+.donate-card .btn {
+  width: 100%;
+}
+
+.donate-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 12px;
+  font-size: .78rem;
+  line-height: 1.5;
+  color: var(--ink-600);
+}
+
+.donate-consent input {
+  flex: none;
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+  accent-color: var(--emerald-700);
+  cursor: pointer;
+}
+
+.donate-consent a {
+  color: var(--emerald-700);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.donate-consent a:hover {
+  color: var(--gold-500);
+}
+
+.donate-note {
+  margin-top: 14px;
+  font-size: .76rem;
+  color: var(--ink-600);
+  padding: 10px 12px;
+  background: var(--sand-100);
+  border-radius: 10px;
+  line-height: 1.5;
+}
+
 section {
   padding: 88px 0;
 }
@@ -668,7 +698,6 @@ h2 {
   font-size: 1.02rem;
 }
 
-/* О проекте */
 .about {
   background: var(--sand-100);
   position: relative;
@@ -682,17 +711,23 @@ h2 {
   align-items: start;
 }
 
-.about__text {
+.about__text-wrap {
   position: relative;
-  z-index: 1;
-  max-height: 240px;
-  overflow-y: auto;
-  padding-right: 26px;
+}
+
+.about__text {
+  max-height: 340px;
+  overflow: hidden;
+  padding-right: 12px;
+  position: relative;
   text-align: justify;
   text-justify: inter-word;
   hyphens: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--emerald-600) rgba(20, 82, 61, .08);
+  transition: max-height .4s ease;
+}
+
+.about__text.is-expanded {
+  max-height: 3000px;
 }
 
 .about__text p {
@@ -705,81 +740,39 @@ h2 {
   color: var(--emerald-900);
 }
 
-.about__text::-webkit-scrollbar {
-  width: 6px;
-}
-
-.about__text::-webkit-scrollbar-track {
-  background: rgba(20, 82, 61, .08);
-  border-radius: 99px;
-}
-
-.about__text::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--emerald-600), var(--gold-500));
-  border-radius: 99px;
-}
-
-.about__scroll-wrap {
-  position: relative;
-}
-
-.about__scroll-wrap::before,
-.about__scroll-wrap::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 52px;
-  pointer-events: none;
-  z-index: 2;
-  opacity: 0;
-  transition: opacity .35s;
-}
-
-.about__scroll-wrap::before {
-  top: 0;
-  background: linear-gradient(180deg, var(--sand-100), transparent);
-}
-
-.about__scroll-wrap::after {
-  bottom: 0;
-  background: linear-gradient(0deg, var(--sand-100), transparent);
-}
-
-.about__scroll-wrap.can-scroll-up::before {
-  opacity: 1;
-}
-
-.about__scroll-wrap.can-scroll-down::after {
-  opacity: 1;
-}
-
-.about__scroll-hint {
-  display: flex;
-  justify-content: center;
+.about__toggle {
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  margin-top: 14px;
-  font-size: .78rem;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--emerald-700);
-  transition: opacity .4s;
+  margin-top: 12px;
+  padding: 10px 18px;
+  border: 1px solid rgba(20, 82, 61, .2);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--emerald-800);
+  font: 700 .9rem var(--font-body);
+  cursor: pointer;
+  transition: background .2s, color .2s, border-color .2s;
 }
 
-.about__scroll-hint svg {
-  animation: hintBounce 1.6s infinite;
+.about__toggle:hover {
+  background: var(--emerald-800);
+  border-color: var(--emerald-800);
+  color: var(--white);
 }
 
-@keyframes hintBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(4px); }
+.about__toggle svg {
+  transition: transform .3s ease;
 }
 
-.about__scroll-hint.is-hidden {
-  opacity: 0;
-  pointer-events: none;
+.about__toggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.about__toggle:focus-visible {
+  outline: 3px solid var(--gold-500);
+  outline-offset: 3px;
 }
 
 .about__aside {
@@ -818,7 +811,6 @@ h2 {
   text-align: center;
 }
 
-/* Цели сбора */
 .goals {
   position: relative;
   overflow: hidden;
@@ -886,7 +878,6 @@ h2 {
   color: rgba(250, 247, 240, .72);
 }
 
-/* Благотворители */
 .donors-table {
   width: 100%;
   border-collapse: separate;
@@ -936,12 +927,6 @@ h2 {
   line-height: 1.35;
 }
 
-.donor-city {
-  color: var(--ink-600);
-  font-size: .75rem;
-  font-weight: 400;
-}
-
 .donor-avatar {
   width: 36px;
   height: 36px;
@@ -970,7 +955,6 @@ h2 {
   flex: none;
 }
 
-/* CTA */
 .cta {
   position: relative;
   overflow: hidden;
@@ -1008,7 +992,6 @@ h2 {
   z-index: 1;
 }
 
-/* Подвал */
 .footer {
   background: var(--emerald-950);
   color: rgba(250, 247, 240, .65);
@@ -1068,19 +1051,34 @@ h2 {
   box-shadow: 0 4px 12px rgba(0, 0, 0, .12);
 }
 
-.social-link--youtube rect { fill: #fff; }
-.social-link--youtube path:first-child { fill: #f00; }
-.social-link--max rect { fill: #f0f0f0; }
-.social-link--max path { fill: #333; }
-.social-link--max text { fill: #333; }
-.social-link--telegram rect { fill: #2481cc; }
-.social-link--telegram path { fill: #fff; }
+.social-link svg {
+  display: block;
+}
+
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 24px;
+  margin-bottom: 24px;
+  font-size: .82rem;
+}
+
+.footer__legal a {
+  color: var(--gold-200);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer__legal a:hover {
+  color: var(--gold-400);
+}
 
 .footer__copyright {
   font-size: .8rem;
+  text-align: center;
 }
 
-/* Появление при скролле */
 .reveal {
   opacity: 0;
   transform: translateY(26px);
@@ -1092,7 +1090,18 @@ h2 {
   transform: none;
 }
 
-/* Планшеты */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 @media (max-width: 960px) {
   .hero__inner {
     grid-template-columns: 1fr;
@@ -1113,8 +1122,7 @@ h2 {
   }
 }
 
-/* Телефоны */
-@media (max-width: 680px) {
+@media (max-width: 960px) {
   .header__inner {
     gap: 10px;
     padding-block: 10px;
@@ -1146,11 +1154,6 @@ h2 {
   .hero__inner {
     padding: 52px 0 60px;
     gap: 32px;
-  }
-
-  .hero__bismillah {
-    font-size: 1.2rem;
-    overflow-wrap: anywhere;
   }
 
   .hero__salam {
@@ -1212,9 +1215,7 @@ h2 {
 
   .about__text {
     max-height: 360px;
-    padding-right: 12px;
     text-align: left;
-    font-size: .96rem;
   }
 
   .about__text p {
@@ -1257,49 +1258,7 @@ h2 {
   .mobile-menu {
     display: flex;
   }
-}
 
-/* Узкие телефоны */
-@media (max-width: 380px) {
-  .container {
-    width: 90%;
-  }
-
-  .hero h1 {
-    font-size: 2rem;
-  }
-
-  .hero__salam {
-    letter-spacing: .08em;
-  }
-
-  .chip {
-    font-size: .72rem;
-    padding: 7px 10px;
-  }
-
-  .donate-total__value {
-    font-size: 1.9rem;
-  }
-
-  .goal__num {
-    font-size: 1.6rem;
-  }
-}
-
-/* Учитываем системную настройку уменьшения анимации */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
-  }
-}
-
-@media (max-width: 680px) {
   .header__inner {
     position: relative;
   }
@@ -1334,10 +1293,7 @@ h2 {
   .header__inner > .btn--gold {
     display: none !important;
   }
-}
 
-/* Благотворители на телефонах */
-@media (max-width: 680px) {
   #donors .container {
     overflow: visible;
   }
@@ -1354,14 +1310,9 @@ h2 {
     font-size: .82rem;
   }
 
-  .donors-table th:nth-child(2),
-  .donors-table td:nth-child(2) {
-    display: none;
-  }
-
   .donors-table th:first-child,
   .donors-table td:first-child {
-    width: 62%;
+    width: 38%;
   }
 
   .donors-table th:last-child,
@@ -1385,6 +1336,48 @@ h2 {
     height: 32px;
   }
 }
+
+@media (max-width: 380px) {
+  .container {
+    width: 90%;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero__salam {
+    letter-spacing: .08em;
+  }
+
+  .chip {
+    font-size: .72rem;
+    padding: 7px 10px;
+  }
+
+  .donate-total__value {
+    font-size: 1.9rem;
+  }
+
+  .goal__num {
+    font-size: 1.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+.goals-grid .goal:nth-child(3) {
+  grid-column: 1 / -1;
+}
 </style>
 </head>
 
@@ -1392,16 +1385,13 @@ h2 {
 
 <header class="header">
   <div class="container header__inner">
-    <a class="logo" href="#" aria-label="Свет — на главную">
+    <a class="logo" href="#" aria-label="Пробуждение уммы — на главную">
       <span class="logo__mark">☾</span>
-      <span>
-        <span class="logo__name">Свет</span>
-        <span class="logo__sub">Проект призыва</span>
-      </span>
+      <span class="logo__name">Пробуждение уммы</span>
     </a>
 
     <nav class="nav" id="nav" aria-label="Основная навигация">
-      <a href="#about">О проекте</a>
+      <a href="#about">О важном</a>
       <a href="#goals">Цели сбора</a>
       <a href="#donors">Благотворители</a>
     </nav>
@@ -1433,12 +1423,9 @@ h2 {
   inert
 >
   <div class="mobile-menu__header">
-    <a class="logo" href="#" aria-label="Свет — на главную">
+    <a class="logo" href="#" aria-label="Пробуждение уммы — на главную">
       <span class="logo__mark">☾</span>
-      <span>
-        <span class="logo__name">Свет</span>
-        <span class="logo__sub">Проект призыва</span>
-      </span>
+      <span class="logo__name">Пробуждение уммы</span>
     </a>
 
     <button
@@ -1446,20 +1433,24 @@ h2 {
       id="menuClose"
       type="button"
       aria-label="Закрыть меню"
-    >
-      &times;
-    </button>
+    >&times;</button>
   </div>
 
   <nav class="mobile-menu__nav" aria-label="Разделы сайта">
-    <a href="#about">О проекте</a>
+    <a href="#about">О важном</a>
     <a href="#goals">Цели сбора</a>
     <a href="#donors">Благотворители</a>
     <a href="#donate">Поддержать проект</a>
   </nav>
 
+  <nav class="mobile-menu__legal" aria-label="Правовая информация">
+      <a href="https://malikgazetdinov.github.io/yslovia.html">Условия пожертвования</a>
+      <a href="https://malikgazetdinov.github.io/police.html">Политика обработки персональных данных</a>
+      <a href="https://malikgazetdinov.github.io/otcheti.html">Отчеты о сборе</a>
+  </nav>
+
   <div class="mobile-menu__footer">
-    Пусть ваши добрые дела продолжают приносить пользу
+    Принеси пользу, распространив Ислам
   </div>
 </aside>
 
@@ -1469,27 +1460,17 @@ h2 {
 
     <div class="container hero__inner">
       <div>
-        <div class="hero__bismillah" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-        <div class="hero__salam">Ас-саламу алейкум</div>
+        <div class="hero__salam">Инвестиция в Ислам</div>
 
-        <h1>Помогите распространять <em>знания об Исламе</em></h1>
+        <h1>Стань причиной <em>процветания</em> Ислама</h1>
 
         <p class="hero__lead">
-          Мы собираем средства на печать книг и брошюр, их бесплатное
-          распространение и создание образовательных проектов. Любой вклад —
-          садака-джария, которая продолжает приносить пользу людям.
+          Ас саламу алейкум, дорогие братья и сестры! Наш мир переживает серьезные изменения в религии, и к сожалению — в сторону деградации. И на этот счет наш Господь сказал в Коране: «<em>Призывай на путь Господа твоего мудростью и добрым увещеванием</em>» (Св. Коран 16:125). Ваше пожертвование станет как раз причиной распространения Ислама. Всем мира и добра!
         </p>
 
         <div class="hero__actions">
           <a href="#donate" class="btn btn--gold">Поддержать проект ✦</a>
-          <a href="#about" class="btn btn--ghost">Узнать о проекте</a>
-        </div>
-
-        <div class="hero__chips">
-          <span class="chip"><span>📖</span> Книги «Свет»</span>
-          <span class="chip"><span>🕊</span> Бесплатные брошюры</span>
-          <span class="chip"><span>🤝</span> Распространение</span>
-          <span class="chip"><span>💡</span> Образовательные проекты</span>
+          <a href="#goals" class="btn btn--ghost">Узнать цели сбора</a>
         </div>
       </div>
 
@@ -1514,7 +1495,7 @@ h2 {
 
         <div class="amounts" id="amounts" aria-label="Выберите сумму пожертвования">
           <button class="amount" type="button" data-value="100" aria-pressed="false">100 ₽</button>
-          <button class="amount is-active" type="button" data-value="500" aria-pressed="true">500 ₽</button>
+          <button class="amount" type="button" data-value="500" aria-pressed="false">500 ₽</button>
           <button class="amount" type="button" data-value="1000" aria-pressed="false">1 000 ₽</button>
           <button class="amount" type="button" data-value="5000" aria-pressed="false">5 000 ₽</button>
         </div>
@@ -1543,12 +1524,21 @@ h2 {
 
         <button class="btn btn--gold" id="donateBtn" type="button">Продолжить ✦</button>
 
+        <label class="donate-consent" for="donationConsent">
+          <input id="donationConsent" type="checkbox" required>
+          <span>
+            Нажимая «Продолжить», я соглашаюсь с
+            <a href="https://malikgazetdinov.github.io/yslovia.html" target="_blank" rel="noopener noreferrer">Условиями пожертвования</a>
+            и
+            <a href="https://malikgazetdinov.github.io/police.html" target="_blank" rel="noopener noreferrer">Политикой обработки персональных данных</a>.
+          </span>
+        </label>
+
         <p class="donate-note">
           Платёж будет обработан ЮKassa. После нажатия «Продолжить» вы перейдёте на защищённую страницу оплаты.
         </p>
       </aside>
 
-      <!-- Скрытая техническая форма ЮKassa: сумма и имя передаются из карточки выше. -->
       <form
         id="yookassaForm"
         class="yoomoney-payment-form yookassa-form-hidden"
@@ -1560,13 +1550,49 @@ h2 {
       >
         <div class="ym-customer-info">
           <div class="ym-block-title">О покупателе</div>
-          <input name="custName" id="yookassaCustName" class="ym-input" type="text" value="">
+          <input
+            name="custName"
+            id="yookassaCustName"
+            class="ym-input"
+            placeholder="ФИО"
+            type="text"
+            value=""
+          >
         </div>
 
-        <div class="ym-hidden-inputs"></div>
+        <div class="ym-hidden-inputs">
+          <input name="shopSuccessURL" type="hidden" value="https://malikgazetdinov.github.io/correct.htm">
+          <input name="shopFailURL" type="hidden" value="https://malikgazetdinov.github.io/nocorrect.htm">
+        </div>
 
-        <input name="customerNumber" type="hidden" value="Пожертвование проекту «Свет»">
-        <input name="sum" id="yookassaSum" class="ym-input ym-sum-input ym-required-input" type="number" step="0.01">
+        <input name="customerNumber" type="hidden" value="Благотворительность на распространение Ислама">
+
+        <div class="ym-payment-btn-block ym-before-line ym-align-space-between">
+          <div class="ym-input-icon-rub">
+            <input
+              name="sum"
+              id="yookassaSum"
+              placeholder="0.00"
+              class="ym-input ym-sum-input ym-required-input"
+              type="number"
+              step="any"
+            >
+          </div>
+
+          <button data-text="Продолжить" class="ym-btn-pay ym-result-price" type="submit">
+            <span class="ym-text-crop">Продолжить</span>
+            <span class="ym-price-output"></span>
+          </button>
+
+          <img
+            src="https://yookassa.ru/integration/simplepay/img/iokassa-gray.svg?v=1.37.0"
+            class="ym-logo"
+            width="114"
+            height="27"
+            alt="ЮKassa"
+          >
+        </div>
+
         <input name="shopId" type="hidden" value="1475662">
       </form>
     </div>
@@ -1575,74 +1601,52 @@ h2 {
   <section class="about" id="about">
     <div class="container">
       <div class="sec-head reveal">
-        <span class="kicker">О проекте</span>
-        <h2>Почему проект «Свет» так важен сегодня</h2>
+        <span class="kicker">О важном</span>
+        <h2>Почему призыв к Исламу особенно важен в наше время?</h2>
       </div>
 
       <div class="about__layout">
         <div>
-          <div class="about__scroll-wrap reveal" id="scrollWrap">
+          <div class="about__text-wrap reveal" id="aboutTextWrap">
             <div class="about__text" id="aboutScroll">
-              <p>
-                Ас саламу алейкум, дорогие братья и сёстры! В нашем 21 веке поистине живётся
-                нелегко: мы живём в такое время, когда если один человек что-то скажет, то его
-                слово за какие-то секунды доходит до всего мира. Сейчас мир соцсетей,
-                видеоплатформ, сайтов и т. д. — когда исламофобам очернить ислам и сбивать
-                людей с пути истины становится очень доступным и лёгким действием. И, к
-                сожалению, они этим активно пользуются.
-              </p>
-              <p>
-                А если людей неверных больше, то жить порой на земле становится тесно. Ясным
-                примером этому служит повсеместная несправедливость, пронизывающая даже до
-                мелочей: распространение лжи в торговле, делах, лечении. А также, особенно в
-                городе, открытость в одежде людей женского пола, распространение спиртных и
-                опьяняющих напитков, азартных игр, кредитов и займов с процентами, отсутствие
-                нормальной возможности молиться мусульманам в школах, техникумах, вузах,
-                местах работы и т. д., колоссальное распространение пищевых продуктов,
-                содержащих в себе запрещённые и сомнительные ингредиенты и т. д.
-              </p>
-              <p>
-                Исходя из всех этих недугов и болезней общества, мир в наше время переживает
-                серьёзное расстройство в духовном плане, из-за чего люди порой сами от этого
-                страдают. Поэтому сейчас существует острая необходимость в активном призыве
-                людей к спасению в обоих мирах — Исламу. Но, как показывает практика, обычной
-                проповедью в мечети этого не достигнуть. Нужны совсем другие, новые и сильные
-                методы призыва людей к истине, чтобы остановить деградацию общества. И как раз
-                для этих методов призыва существует необходимость в средствах, посредством
-                которых можно осуществить это.
-              </p>
-              <p>
-                К примеру, распространение книг или брошюр в огромных количествах — а это то,
-                что нужно, — требует также и больших расходов. Или создание продуктов ИИ,
-                которые можно распространить по интернету для призыва к Исламу. И мы как раз
-                предлагаем вам очень хорошую возможность встать на путь призыва к Исламу хотя
-                бы одной монетой. Так вы станете причиной благого, и это станет для вас
-                <strong>садакой-джария</strong>, где вы будете получать награды даже тогда,
-                когда уйдёте из своей жизни.
-              </p>
-              <p>
-                От вас не требуется больших пожертвований: даже если каждый мусульманин
-                (и каждая мусульманка) пожертвует всего лишь одним рублём, то выходит огромная
-                сумма, которую не накопить даже за всю свою жизнь. А что будет, если каждый
-                вложится по 5, 10 или 30 рублей, — не говоря уже о других, больших суммах?
-              </p>
-              <p><strong>Пусть Аллах благословит вас и ваши пожертвования. Аминь.</strong></p>
-            </div>
-          </div>
+              <p>Наш век быстрый и непростой: одно сказанное слово за секунды разносится по всему миру. Мы живём в эпоху соцсетей, видеоплатформ и сайтов — и это значит, что голоса, направленные против Ислама, <strong>стремительно увеличиваются</strong>.</p>
 
-          <div class="about__scroll-hint" id="scrollHint">
-            Читайте полный текст
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M6 9l6 6 6-6"/>
-            </svg>
+              <p>К сожалению, сегодня немало того, что ранит чуткое сердце: несправедливость проникает даже в мелочи — в торговлю, дела, услуги. В городах всё чаще встречаются вещи, которые тревожат верующих: откровенная одежда, алкоголь, азартные игры, кредиты с процентами. Не всегда есть спокойная возможность помолиться в учебных заведениях или на работе. А в составе многих, если не большинства продуктов, — ингредиенты, употребление которых нежелательно или запрещено.</p>
+
+              <p>Всё это говорит о том, что обществу сейчас особенно не хватает света и опоры. И от этой пустоты страдают сами люди — часто даже не понимая, откуда приходит внутренняя тяжесть. Именно поэтому так важно бережно напоминать о том, что возвращает душе равновесие и даёт настоящую надежду — об Исламе, где человек получает счастье в обоих мирах.</p>
+
+              <p>При этом обычные способы призыва к Исламу, по типу проповедей в мечети не всегда доходят до тех, кто в них больше всего нуждается. Нужны современные, продуманные форматы: книги и брошюры, цифровые материалы, порой нестандартные методы призыва к Исламу, понятные и близкие людям разных поколений. Например, издание тысяч экземпляров требует немалых средств. А цифровые продукты, в том числе созданные с помощью технологий, вроде ИИ, могут дойти до миллионов — и сделать это можно быстро с совместными усилиями.</p>
+
+              <p><strong>Мы предлагаем вам стать частью этого дела</strong>. И для этого не нужно ничего сложного: достаточно самого небольшого вклада. Даже <strong>один рубль</strong> — это уже <u>реальная поддержка</u>, которая складывается в большое общее дело. Такое пожертвование может стать для вас садакой-джария — непрерывной милостыней: награда за неё продолжает записываться, даже когда человек покидает этот мир.</p>
+
+              <p>Представьте, как много можно сделать вместе: если каждый верующий внесёт всего один рубль, получится сумма, которую нелегко собрать в одиночку. А если вклад будет чуть больше — 5, 10 или 30 рублей, — эффект станет по-настоящему ощутимым. Вы не просто помогаете с печатью или разработкой: вы становитесь причиной того, что ещё один человек услышит доброе слово, найдёт опору и, возможно, сделает шаг к истине.</p>
+
+              <p>Сделать такой вклад — это просто и по силам каждому. Пусть Аллах примет ваше доброе намерение, благословит ваши усилия и воздаст вам многократно. Аминь.</p>
+            </div>
+
+            <button
+              class="about__toggle"
+              id="aboutToggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="aboutScroll"
+            >
+              <span class="about__toggle-label">Развернуть текст</span>
+              <svg width="16" height="16" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2.5"
+                   stroke-linecap="round" stroke-linejoin="round"
+                   aria-hidden="true">
+                <path d="m6 9 6 6 6-6"/>
+              </svg>
+            </button>
           </div>
         </div>
 
         <div class="about__aside">
           <div class="about__ayah reveal">
             <div class="pattern pattern--dark"></div>
-            <p class="about__ayah-text">«Тот, кто указывает на благое, получает награду подобно тому, кто совершил его».</p>
-            <div class="about__ayah-src">Хадис · Муслим</div>
+            <p class="about__ayah-text">«Притчей о тех, кто расходует свое имущество на пути Аллаха, является притча о зерне, из которого выросло семь колосьев, и в каждом колосе — по сто зерен. Аллах увеличивает награду, кому пожелает. Аллах — Объемлющий, Знающий»</p>
+            <div class="about__ayah-src">Св. Коран 2:261</div>
           </div>
         </div>
       </div>
@@ -1655,7 +1659,7 @@ h2 {
       <div class="sec-head sec-head--center reveal">
         <span class="kicker">Цели сбора</span>
         <h2>На что идут ваши пожертвования</h2>
-        <p>Каждое направление проекта работает на одну задачу — донести полезные знания до как можно большего числа читателей.</p>
+        <p>Каждое направление работает на одну задачу — донести призыв Ислама до каждого из людей.</p>
       </div>
 
       <div class="goals-grid">
@@ -1663,7 +1667,7 @@ h2 {
           <div class="goal__num">01</div>
           <div>
             <h3>Печать книг «Свет»</h3>
-            <p>Подготовка и выпуск качественных изданий для распространения среди читателей.</p>
+            <p>Подготовка и выпуск качественных изданий для распространения света среди читателей.</p>
           </div>
         </article>
 
@@ -1671,23 +1675,15 @@ h2 {
           <div class="goal__num">02</div>
           <div>
             <h3>Брошюры о смысле жизни</h3>
-            <p>Небольшие издания для бесплатной раздачи и отправки по всей стране.</p>
+            <p>Небольшие издания для бесплатной раздачи по всей стране.</p>
           </div>
         </article>
 
         <article class="goal reveal">
           <div class="goal__num">03</div>
           <div>
-            <h3>Распространение материалов</h3>
-            <p>Доставка книг и брошюр читателям офлайн и через интернет.</p>
-          </div>
-        </article>
-
-        <article class="goal reveal">
-          <div class="goal__num">04</div>
-          <div>
-            <h3>Образовательные проекты</h3>
-            <p>Разработка цифровых материалов и инструментов для распространения знаний.</p>
+            <h3>Различные способы призыва</h3>
+            <p>По мере развития нашего проекта будут открываться различные способы донесения Ислама до людей, ин шаа Аллах.</p>
           </div>
         </article>
       </div>
@@ -1705,79 +1701,25 @@ h2 {
         <thead>
           <tr>
             <th>Имя</th>
-            <th>Город</th>
+            <th>Время</th>
             <th style="text-align:right">Сумма</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <span class="donor-name">
-                <span class="donor-avatar">А</span>
-                <span class="donor-info">
-                  <span>Анонимно</span>
-                  <span class="donor-city">Город не указан</span>
-                </span>
-              </span>
-            </td>
-            <td>—</td>
-            <td>5 000 ₽</td>
-          </tr>
-          <tr>
-            <td>
-              <span class="donor-name">
-                <span class="donor-avatar">Р</span>
-                <span class="donor-info">
-                  <span>Рустам</span>
-                  <span class="donor-city">Уфа, Россия</span>
-                </span>
-              </span>
-            </td>
-            <td>Уфа</td>
-            <td>1 000 ₽</td>
-          </tr>
-          <tr>
-            <td>
-              <span class="donor-name">
-                <span class="donor-avatar">А</span>
-                <span class="donor-info">
-                  <span>Айгуль</span>
-                  <span class="donor-city">Казань, Россия</span>
-                </span>
-              </span>
-            </td>
-            <td>Казань</td>
-            <td>500 ₽</td>
-          </tr>
+          <!--
           <tr>
             <td>
               <span class="donor-name">
                 <span class="donor-avatar">Т</span>
-                <span class="donor-info">
-                  <span>Тимур</span>
-                  <span class="donor-city">Москва, Россия</span>
-                </span>
+                <span class="donor-info"><span>Тимур</span></span>
               </span>
             </td>
-            <td>Москва</td>
+            <td>13 января 2027 г.</td>
             <td>500 ₽</td>
           </tr>
+          -->
         </tbody>
       </table>
-
-      <p class="donors-note">
-        Демонстрационный список. Публикуйте имена, города и суммы только с согласия благотворителей.
-      </p>
-    </div>
-  </section>
-
-  <section class="cta">
-    <div class="pattern pattern--dark"></div>
-    <div class="container">
-      <p class="cta__dua" lang="ar" dir="rtl">آمين</p>
-      <h2>Пусть Аллах благословит вас и ваши пожертвования</h2>
-      <p>Каждая напечатанная книга — это знание, которое продолжит приносить пользу и после того, как мы с вами расстанемся с этим миром.</p>
-      <a href="#donate" class="btn btn--gold">Внести садака ✦</a>
     </div>
   </section>
 </main>
@@ -1787,47 +1729,90 @@ h2 {
     <div class="footer__bottom">
       <div class="footer__contacts">
         <p class="contact-item">
+          <strong>Организатор:</strong>
+          <span>Газетдинов Малик Равилевич</span>
+        </p>
+        <p class="contact-item">
+          <strong>ИНН:</strong>
+          <span>022541182185</span>
+        </p>
+        <p class="contact-item">
           <strong>Телефон:</strong>
-          <a href="tel:+79990000000" class="contact-link">+7 (999) 000-00-00</a>
+          <a href="tel:+79870472410" class="contact-link">+7 (987) 047-24-10</a>
         </p>
         <p class="contact-item">
           <strong>Почта:</strong>
-          <a href="mailto:info@svet-project.ru" class="contact-link">info@svet-project.ru</a>
+          <a href="mailto:malik.gazetdinot@gmail.com" class="contact-link">malik.gazetdinot@gmail.com</a>
         </p>
       </div>
 
       <div class="footer__socials">
         <h4 class="socials__title">Мы в соцсетях и мессенджерах</h4>
         <div class="socials__links">
-          <a href="#" class="social-link social-link--youtube" title="YouTube" aria-label="Наш канал на YouTube">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect width="24" height="24" rx="4" fill="#fff"/>
-              <path d="M18 6H6c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z" fill="#f00"/>
-              <path d="M8.5 10.5l5 3-5 3v-6z" fill="#fff"/>
+          <a href="https://youtube.com/@sohyatyl_umma?si=0F7qbrKuWtpiNpP7"
+             class="social-link" target="_blank" rel="noopener noreferrer"
+             title="YouTube" aria-label="Наш канал на YouTube">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136
+                       C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505
+                       A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12
+                       s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136
+                       c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505
+                       a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12
+                       s0-3.93-.502-5.814z" fill="#FF0000"/>
+              <path d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#fff"/>
             </svg>
           </a>
 
-          <a href="#" class="social-link social-link--max" title="Чат в Max" aria-label="Чат в Max">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect width="24" height="24" rx="4" fill="#f0f0f0"/>
-              <path d="M7 7h10v10H7z" fill="#333"/>
-              <path d="M9 9h6v6H9z" fill="#fff"/>
-              <text x="12" y="17" font-size="10" font-weight="bold" text-anchor="middle" fill="#333">MAX</text>
+          <a href="https://max.ru/u/f9LHodD0cOKe9vKxf4bN5Ofbz8H_P5ukEnzDrKprkkSVMRFxW72guGtdzm8"
+             class="social-link" target="_blank" rel="noopener noreferrer"
+             title="Чат в MAX" aria-label="Чат в MAX">
+            <svg width="40" height="40" viewBox="0 0 40 40"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="maxGrad" x1="0" y1="0" x2="40" y2="40"
+                                gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#471AFF"/>
+                  <stop offset="1" stop-color="#9500FF"/>
+                </linearGradient>
+              </defs>
+              <rect width="40" height="40" rx="8" fill="url(#maxGrad)"/>
+              <path d="M20 8.5c-6.1 0-11 4.1-11 9.2 0 2.9 1.6 5.5 4.1 7.3l-1.1 5.3 5.1-1.9c.9.2 1.9.3 2.9.3 6.1 0 11-4.1 11-9.2S26.1 8.5 20 8.5Z"
+                    fill="none" stroke="#fff" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
 
-          <a href="#" class="social-link social-link--telegram" title="Telegram" aria-label="Наш Telegram">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect width="24" height="24" rx="4" fill="#2481cc"/>
-              <path d="M19.5 4.5L11.5 17.5V12.5L7.5 15.5L9.5 11L5.5 8.5L17.5 5.5L19.5 4.5Z" fill="#fff"/>
+          <a href="https://t.me/Malik987123" class="social-link" target="_blank"
+             rel="noopener noreferrer" title="Telegram" aria-label="Наш Telegram">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="12" cy="12" r="12" fill="#26A5E4"/>
+              <path d="M16.906 7.224c.1-.002.321.023.465.14a.506.506 0 0 1
+                       .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36
+                       8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902
+                       -1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91
+                       .177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212
+                       s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061
+                       3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44
+                       -.752-.26-1.349-.398-1.297-.841.028-.24.387-.496 1.063-.752
+                       4.148-1.807 6.912-2.998 8.292-3.573 1.958-.814 2.365-.954
+                       2.63-.96z" fill="#fff"/>
             </svg>
           </a>
         </div>
       </div>
     </div>
 
+    <nav class="footer__legal" aria-label="Правовая информация">
+      <a href="https://malikgazetdinov.github.io/yslovia.html">Условия пожертвования</a>
+      <a href="https://malikgazetdinov.github.io/police.html">Политика обработки персональных данных</a>
+      <a href="https://malikgazetdinov.github.io/otcheti.html">Отчеты о сборе</a>
+    </nav>
+
     <div class="footer__copyright">
-      &copy; 2026 Проект «Свет». Все права защищены.
+      &copy; 2026 Проект «Пробуждение уммы»
     </div>
   </div>
 </footer>
@@ -1835,7 +1820,7 @@ h2 {
 <script src="https://yookassa.ru/integration/simplepay/js/yookassa_construct_form.js?v=1.35.0"></script>
 
 <script>
-  // Мобильная боковая панель
+  // Мобильное меню
   const burger = document.getElementById('burger');
   const mobileMenu = document.getElementById('mobileMenu');
   const menuOverlay = document.getElementById('menuOverlay');
@@ -1894,7 +1879,7 @@ h2 {
     }
   });
 
-  const desktopMedia = window.matchMedia('(min-width: 681px)');
+  const desktopMedia = window.matchMedia('(min-width: 961px)');
 
   if (desktopMedia.addEventListener) {
     desktopMedia.addEventListener('change', event => {
@@ -1926,47 +1911,58 @@ h2 {
 
     button.classList.add('is-active');
     button.setAttribute('aria-pressed', 'true');
-    customAmount.value = '';
+    customAmount.value = button.dataset.value;
+    customAmount.setCustomValidity('');
   });
 
   customAmount.addEventListener('input', () => {
-    if (customAmount.value) {
-      amounts.querySelectorAll('.amount').forEach(button => {
-        button.classList.remove('is-active');
-        button.setAttribute('aria-pressed', 'false');
-      });
-    }
+    amounts.querySelectorAll('.amount').forEach(button => {
+      button.classList.remove('is-active');
+      button.setAttribute('aria-pressed', 'false');
+    });
+
+    customAmount.setCustomValidity('');
   });
 
-  // Передача выбранных данных в форму ЮKassa и переход к оплате
+  // Передача данных в форму ЮKassa
   const donateButton = document.getElementById('donateBtn');
+  const donationConsent = document.getElementById('donationConsent');
   const yookassaForm = document.getElementById('yookassaForm');
   const yookassaSum = document.getElementById('yookassaSum');
   const yookassaCustName = document.getElementById('yookassaCustName');
 
+  donationConsent.addEventListener('change', () => {
+    donationConsent.setCustomValidity('');
+  });
+
   donateButton.addEventListener('click', () => {
-    const customValue = Number(customAmount.value);
-    const activeAmount = amounts.querySelector('.amount.is-active');
-    const presetValue = activeAmount ? Number(activeAmount.dataset.value) : 0;
-    const donationValue = customAmount.value.trim() !== '' ? customValue : presetValue;
+    if (!donationConsent.checked) {
+      donationConsent.setCustomValidity(
+        'Для продолжения подтвердите согласие с условиями и политикой обработки персональных данных.'
+      );
+      donationConsent.reportValidity();
+      donationConsent.focus();
+      return;
+    }
+
+    donationConsent.setCustomValidity('');
+
+    const donationValue = Number(customAmount.value);
 
     if (!Number.isFinite(donationValue) || donationValue < 1) {
-      customAmount.focus();
       customAmount.setCustomValidity('Введите сумму пожертвования не меньше 1 рубля.');
       customAmount.reportValidity();
+      customAmount.focus();
       return;
     }
 
     customAmount.setCustomValidity('');
-
-    // Перепроверяем точность и формат суммы перед отправкой.
     yookassaSum.value = donationValue.toFixed(2);
     yookassaCustName.value = donorName.value.trim();
 
     donateButton.disabled = true;
     donateButton.textContent = 'Переход к оплате…';
 
-    // Обычная отправка формы на защищённую страницу ЮKassa.
     yookassaForm.submit();
   });
 
@@ -1988,25 +1984,21 @@ h2 {
     });
   }
 
-  // Подсказка для прокручиваемого текста
-  const scrollWrap = document.getElementById('scrollWrap');
-  const aboutScroll = document.getElementById('aboutScroll');
-  const scrollHint = document.getElementById('scrollHint');
+  // Разворачивание текста в разделе «О важном»
+  const aboutText = document.getElementById('aboutScroll');
+  const aboutToggle = document.getElementById('aboutToggle');
+  const aboutToggleLabel = aboutToggle.querySelector('.about__toggle-label');
 
-  function updateScrollState() {
-    const canScrollUp = aboutScroll.scrollTop > 4;
-    const canScrollDown =
-      aboutScroll.scrollTop < aboutScroll.scrollHeight - aboutScroll.clientHeight - 4;
+  aboutToggle.addEventListener('click', () => {
+    const isExpanded = aboutToggle.getAttribute('aria-expanded') === 'true';
+    const shouldExpand = !isExpanded;
 
-    scrollWrap.classList.toggle('can-scroll-up', canScrollUp);
-    scrollWrap.classList.toggle('can-scroll-down', canScrollDown);
-    scrollHint.classList.toggle('is-hidden', !canScrollDown);
-  }
-
-  aboutScroll.addEventListener('scroll', updateScrollState, { passive: true });
-  window.addEventListener('load', updateScrollState);
-  window.addEventListener('resize', updateScrollState);
-  updateScrollState();
+    aboutToggle.setAttribute('aria-expanded', String(shouldExpand));
+    aboutText.classList.toggle('is-expanded', shouldExpand);
+    aboutToggleLabel.textContent = shouldExpand
+      ? 'Свернуть текст'
+      : 'Развернуть текст';
+  });
 </script>
 
 </body>
