@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#06231a">
+  <meta name="description" content="Спасибо за пожертвование проекту «Свет».">
+  <title>Пожертвование принято — проект «Свет»</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Amiri&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --emerald-950: #06231a;
+      --emerald-900: #0a3024;
+      --emerald-800: #0e4030;
+      --emerald-700: #14523d;
+      --gold-500: #c9a227;
+      --gold-400: #d9b544;
+      --gold-200: #eed9a0;
+      --sand-50: #faf7f0;
+      --ink-900: #1c2420;
+      --ink-600: #4b5852;
+      --font-display: 'Marcellus', serif;
+      --font-arabic: 'Amiri', serif;
+      --font-body: 'Manrope', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: var(--ink-900);
+      background: var(--sand-50);
+      font-family: var(--font-body);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .header {
+      background: var(--emerald-950);
+      border-bottom: 1px solid rgba(233, 215, 160, .18);
+    }
+
+    .container {
+      width: min(1140px, 92%);
+      margin-inline: auto;
+    }
+
+    .header__inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--sand-50);
+      text-decoration: none;
+    }
+
+    .logo__mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      flex: none;
+      border: 1px solid rgba(233, 215, 160, .35);
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--emerald-700), var(--emerald-900));
+      color: var(--gold-400);
+      font: 1.35rem var(--font-arabic);
+    }
+
+    .logo__name {
+      display: block;
+      font: 1.35rem var(--font-display);
+      letter-spacing: .04em;
+    }
+
+    .logo__sub {
+      display: block;
+      color: var(--gold-200);
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    main {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 64px 0;
+      background:
+        radial-gradient(900px 500px at 85% -10%, rgba(201, 162, 39, .16), transparent 60%),
+        linear-gradient(160deg, var(--emerald-950), var(--emerald-800) 62%, var(--emerald-700));
+    }
+
+    .pattern {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .05;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Cpath d='M40 0L80 40 40 80 0 40Z'/%3E%3Cpath d='M40 14L66 40 40 66 14 40Z'/%3E%3Ccircle cx='40' cy='40' r='6'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: 80px 80px;
+    }
+
+    .card {
+      width: min(560px, 100%);
+      position: relative;
+      z-index: 1;
+      padding: 46px 42px;
+      border-top: 4px solid var(--gold-500);
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 24px 60px rgba(6, 35, 26, .22);
+      text-align: center;
+    }
+
+    .status-icon {
+      width: 76px;
+      height: 76px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 22px;
+      border: 1px solid rgba(20, 82, 61, .12);
+      border-radius: 50%;
+      background: #edf5ef;
+      color: var(--emerald-700);
+    }
+
+    .status-icon svg { width: 38px; height: 38px; }
+
+    .eyebrow {
+      margin-bottom: 10px;
+      color: var(--gold-500);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin-bottom: 14px;
+      color: var(--emerald-950);
+      font: 400 clamp(2rem, 5vw, 2.7rem)/1.15 var(--font-display);
+    }
+
+    .message {
+      max-width: 420px;
+      margin: 0 auto 24px;
+      color: var(--ink-600);
+    }
+
+    .dua {
+      margin-bottom: 26px;
+      color: var(--emerald-800);
+      font: 1.4rem var(--font-arabic);
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+      box-shadow: 0 6px 20px rgba(201, 162, 39, .28);
+      color: var(--emerald-950);
+      font: 700 .95rem var(--font-body);
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(201, 162, 39, .4);
+    }
+
+    .footer {
+      padding: 20px 0;
+      background: var(--emerald-950);
+      color: rgba(250, 247, 240, .65);
+      text-align: center;
+      font-size: .8rem;
+    }
+
+    @media (max-width: 520px) {
+      main { padding: 38px 0; }
+      .card { padding: 36px 22px; }
+      .actions { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="index.html" aria-label="Свет — на главную">
+        <span class="logo__mark">☾</span>
+        <span>
+          <span class="logo__name">Свет</span>
+          <span class="logo__sub">Проект призыва</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <div class="pattern" aria-hidden="true"></div>
+
+    <section class="container card" aria-labelledby="pageTitle">
+      <div class="status-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m5 12 4 4L19 6"/>
+        </svg>
+      </div>
+
+      <p class="eyebrow">Платёж подтверждён</p>
+      <h1 id="pageTitle">Спасибо за ваше пожертвование!</h1>
+      <p class="message">
+        Ваш вклад поможет печатать и распространять полезные книги и материалы.
+        Пусть это добро принесёт пользу многим людям.
+      </p>
+      <p class="dua" lang="ar" dir="rtl">بارك الله فيكم</p>
+
+      <div class="actions">
+        <a class="btn" href="https://malikgazetdinov.github.io/">Вернуться на сайт</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 Проект «Свет». Все права защищены.</div>
+  </footer>
+</body>
+</html>
