@@ -1448,13 +1448,13 @@ h2 {
 
         <div class="donate-total">
           <span class="donate-total__label">Собрано</span>
-          <div class="donate-total__value" id="totalValue" aria-live="polite">0 ₽</div>
+          <div class="donate-total__value" id="totalValue" aria-live="polite">Загружаем…</div>
         </div>
 
         <div class="donate-stats">
           <div class="donate-stats__item">
-            <div class="donate-stats__num" id="statCount" aria-live="polite">0</div>
-            <div class="donate-stats__label">Пожертвований</div>
+            <div class="donate-stats__num" id="statCount" aria-live="polite">…</div>
+            <div class="donate-stats__label">Благотворителей</div>
           </div>
           <div class="donate-stats__item">
             <div class="donate-stats__num">∞</div>
@@ -1639,7 +1639,8 @@ h2 {
           <tr><td colspan="3">Загружаем список…</td></tr>
         </tbody>
       </table>
-      <p>Демонстрационный режим</p>
+
+      <p class="donors-note">Пожертвования отображаются с согласия благотворителей.</p>
     </div>
   </section>
 </main>
@@ -1907,12 +1908,13 @@ h2 {
       : 'Развернуть текст';
   });
 
-  // Загрузка благотворителей из опубликованной Google Таблицы
-    // Загрузка благотворителей из Google Таблицы
+  // Загрузка благотворителей и расчёт статистики из опубликованной Google Таблицы
   const donorsCsvUrl =
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vRxAabXWF7N8IzMFsXZ7j4y2q0m-1ft6YJ8NjGCwL-WpCmevZMSnKlDBUttmFlN-_QHKrJ2BzlmGx0W/pub?output=csv';
 
   const donorsList = document.getElementById('donorsList');
+  const totalValue = document.getElementById('totalValue');
+  const statCount = document.getElementById('statCount');
 
   function parseCsv(csv) {
     const rows = [];
@@ -1945,6 +1947,7 @@ h2 {
 
     row.push(cell.trim());
     if (row.some(value => value !== '')) rows.push(row);
+
     return rows;
   }
 
@@ -1958,9 +1961,22 @@ h2 {
     })[char]);
   }
 
+  function parseDonationAmount(value) {
+    // Принимает числа вида 54600, 54 600 ₽, 54 600,50.
+    const normalized = String(value ?? '')
+      .replace(/\u00A0/g, ' ')
+      .replace(/[^\d,.-]/g, '')
+      .replace(',', '.');
+
+    if (!normalized || !/\d/.test(normalized)) return null;
+
+    const amount = Number(normalized);
+    return Number.isFinite(amount) && amount >= 0 ? amount : null;
+  }
+
   async function loadDonors() {
     try {
-      const response = await fetch(donorsCsvUrl);
+      const response = await fetch(donorsCsvUrl, { cache: 'no-store' });
 
       if (!response.ok) {
         throw new Error(`Google вернул HTTP ${response.status}`);
@@ -1970,6 +1986,8 @@ h2 {
       const rows = parseCsv(csv.replace(/^\uFEFF/, ''));
 
       if (rows.length < 2) {
+        totalValue.textContent = '0 ₽';
+        statCount.textContent = '0';
         donorsList.innerHTML =
           '<tr><td colspan="3">Пока нет записей</td></tr>';
         return;
@@ -1989,13 +2007,36 @@ h2 {
 
       if (nameIndex === -1 || dateIndex === -1 || amountIndex === -1) {
         throw new Error(
-          `Не найдены заголовки Имя/Дата/Сумма. Получены заголовки: ${headers.join(', ')}`
+          `Не найдены заголовки Имя/Дата/Сумма. Заголовки таблицы: ${headers.join(', ')}`
         );
       }
 
       const donors = rows.slice(1).filter(row =>
         row.some(value => value.trim() !== '')
       );
+
+      const validDonations = donors
+        .map(row => ({
+          row,
+          amount: parseDonationAmount(row[amountIndex])
+        }))
+        .filter(item =>
+          (item.row[nameIndex] || '').trim() !== '' &&
+          item.amount !== null
+        );
+
+      const total = validDonations.reduce(
+        (sum, item) => sum + item.amount,
+        0
+      );
+
+      totalValue.textContent =
+        `${new Intl.NumberFormat('ru-RU', {
+          maximumFractionDigits: 2
+        }).format(total)} ₽`;
+
+      statCount.textContent =
+        new Intl.NumberFormat('ru-RU').format(validDonations.length);
 
       if (!donors.length) {
         donorsList.innerHTML =
@@ -2004,10 +2045,10 @@ h2 {
       }
 
       donorsList.innerHTML = donors.map(row => {
-        const name = row[nameIndex] || 'Благотворитель';
+        const name = (row[nameIndex] || '').trim() || 'Благотворитель';
         const date = row[dateIndex] || '';
         const amount = row[amountIndex] || '';
-        const initial = [...name.trim()][0] || '?';
+        const initial = [...name][0] || '?';
 
         return `
           <tr>
@@ -2024,8 +2065,10 @@ h2 {
       }).join('');
     } catch (error) {
       console.error('Не удалось загрузить Google Таблицу:', error);
+      totalValue.textContent = '—';
+      statCount.textContent = '—';
       donorsList.innerHTML =
-        '<tr><td colspan="3">Не удалось загрузить список. Проверьте консоль браузера.</td></tr>';
+        '<tr><td colspan="3">Не удалось загрузить список благотворителей.</td></tr>';
     }
   }
 
