@@ -132,13 +132,6 @@ a {
   font-size: 1.35rem;
 }
 
-.logo__name {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  color: var(--sand-50);
-  letter-spacing: .04em;
-}
-
 .logo__sub {
   display: block;
   font-family: var(--font-body);
@@ -147,6 +140,13 @@ a {
   letter-spacing: .22em;
   text-transform: uppercase;
   color: var(--gold-200);
+}
+
+.logo__name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--sand-50);
+  letter-spacing: .04em;
 }
 
 .nav {
@@ -954,6 +954,14 @@ h2 {
   flex: none;
 }
 
+.donors-toggle {
+  margin-top: 18px;
+}
+
+.donors-toggle[hidden] {
+  display: none;
+}
+
 .cta {
   position: relative;
   overflow: hidden;
@@ -1545,17 +1553,11 @@ h2 {
           <div class="about__text-wrap reveal" id="aboutTextWrap">
             <div class="about__text" id="aboutScroll">
               <p>Наш век быстрый и непростой: одно сказанное слово за секунды разносится по всему миру. Мы живём в эпоху соцсетей, видеоплатформ и сайтов — и это значит, что голоса, направленные против Ислама, <strong>стремительно увеличиваются</strong>.</p>
-
               <p>К сожалению, сегодня немало того, что ранит чуткое сердце: несправедливость проникает даже в мелочи — в торговлю, дела, услуги. В городах всё чаще встречаются вещи, которые тревожат верующих: откровенная одежда, алкоголь, азартные игры, кредиты с процентами. Не всегда есть спокойная возможность помолиться в учебных заведениях или на работе. А в составе многих, если не большинства продуктов, — ингредиенты, употребление которых нежелательно или запрещено.</p>
-
               <p>Всё это говорит о том, что обществу сейчас особенно не хватает света и опоры. И от этой пустоты страдают сами люди — часто даже не понимая, откуда приходит внутренняя тяжесть. Именно поэтому так важно бережно напоминать о том, что возвращает душе равновесие и даёт настоящую надежду — об Исламе, где человек получает счастье в обоих мирах.</p>
-
               <p>При этом обычные способы призыва к Исламу, по типу проповедей в мечети не всегда доходят до тех, кто в них больше всего нуждается. Нужны современные, продуманные форматы: книги и брошюры, цифровые материалы, порой нестандартные методы призыва к Исламу, понятные и близкие людям разных поколений. Например, издание тысяч экземпляров требует немалых средств. А цифровые продукты, в том числе созданные с помощью технологий, вроде ИИ, могут дойти до миллионов — и сделать это можно быстро с совместными усилиями.</p>
-
               <p><strong>Мы предлагаем вам стать частью этого дела</strong>. И для этого не нужно ничего сложного: достаточно самого небольшого вклада. Даже <strong>один рубль</strong> — это уже <u>реальная поддержка</u>, которая складывается в большое общее дело. Такое пожертвование может стать для вас садакой-джария — непрерывной милостыней: награда за неё продолжает записываться, даже когда человек покидает этот мир.</p>
-
               <p>Представьте, как много можно сделать вместе: если каждый верующий внесёт всего один рубль, получится сумма, которую нелегко собрать в одиночку. А если вклад будет чуть больше — 5, 10 или 30 рублей, — эффект станет по-настоящему ощутимым. Вы не просто помогаете с печатью или разработкой: вы становитесь причиной того, что ещё один человек услышит доброе слово, найдёт опору и, возможно, сделает шаг к истине.</p>
-
               <p>Сделать такой вклад — это просто и по силам каждому. Пусть Аллах примет ваше доброе намерение, благословит ваши усилия и воздаст вам многократно. Аминь.</p>
             </div>
 
@@ -1638,6 +1640,16 @@ h2 {
           <tr><td colspan="3">Загружаем список…</td></tr>
         </tbody>
       </table>
+
+      <button class="about__toggle donors-toggle" id="donorsToggle"
+        type="button" aria-expanded="false" aria-controls="donorsList" hidden>
+        <span id="donorsToggleLabel">Развернуть список</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+          stroke-linejoin="round" aria-hidden="true">
+          <path d="m6 9 6 6 6-6"/>
+        </svg>
+      </button>
     </div>
   </section>
 </main>
@@ -1835,6 +1847,7 @@ h2 {
   const yookassaForm = document.getElementById('yookassaForm');
   const yookassaSum = document.getElementById('yookassaSum');
   const yookassaCustName = document.getElementById('yookassaCustName');
+  const yookassaCustomerNumber = document.getElementById('yookassaCustomerNumber');
 
   donationConsent.addEventListener('change', () => {
     donationConsent.setCustomValidity('');
@@ -1863,10 +1876,10 @@ h2 {
 
     customAmount.setCustomValidity('');
     yookassaSum.value = donationValue.toFixed(2);
-    const donorNameValue = donorName.value.trim() || 'Аноним';
-yookassaCustName.value = donorNameValue;
-document.getElementById('yookassaCustomerNumber').value = donorNameValue;
 
+    const donorNameValue = donorName.value.trim() || 'Аноним';
+    yookassaCustName.value = donorNameValue;
+    yookassaCustomerNumber.value = donorNameValue;
 
     donateButton.disabled = true;
     donateButton.textContent = 'Переход к оплате…';
@@ -1915,6 +1928,14 @@ document.getElementById('yookassaCustomerNumber').value = donorNameValue;
   const donorsList = document.getElementById('donorsList');
   const totalValue = document.getElementById('totalValue');
   const statCount = document.getElementById('statCount');
+  const donorsToggle = document.getElementById('donorsToggle');
+  const donorsToggleLabel = document.getElementById('donorsToggleLabel');
+
+  const DONORS_COLLAPSED_LIMIT = 5;
+  const DONORS_EXPANDED_LIMIT = 15;
+
+  let donorsToShow = [];
+  let donorsExpanded = false;
 
   function parseCsv(csv) {
     const rows = [];
@@ -1962,7 +1983,6 @@ document.getElementById('yookassaCustomerNumber').value = donorNameValue;
   }
 
   function parseDonationAmount(value) {
-    // Принимает числа вида 54600, 54 600 ₽, 54 600,50.
     const normalized = String(value ?? '')
       .replace(/\u00A0/g, ' ')
       .replace(/[^\d,.-]/g, '')
@@ -1974,18 +1994,55 @@ document.getElementById('yookassaCustomerNumber').value = donorNameValue;
     return Number.isFinite(amount) && amount >= 0 ? amount : null;
   }
 
+  function renderDonors() {
+    const visibleDonors = donorsExpanded
+      ? donorsToShow.slice(0, DONORS_EXPANDED_LIMIT)
+      : donorsToShow.slice(0, DONORS_COLLAPSED_LIMIT);
+
+    donorsList.innerHTML = visibleDonors.map(({ name, date, amountText }) => {
+      const initial = [...name][0] || '?';
+
+      return `
+        <tr>
+          <td>
+            <span class="donor-name">
+              <span class="donor-avatar">${escapeHtml(initial)}</span>
+              <span class="donor-info"><span>${escapeHtml(name)}</span></span>
+            </span>
+          </td>
+          <td>${escapeHtml(date)}</td>
+          <td>${escapeHtml(amountText)}</td>
+        </tr>
+      `;
+    }).join('');
+
+    const hasMoreThanCollapsedLimit =
+      donorsToShow.length > DONORS_COLLAPSED_LIMIT;
+
+    donorsToggle.hidden = !hasMoreThanCollapsedLimit;
+    donorsToggle.setAttribute('aria-expanded', String(donorsExpanded));
+    donorsToggleLabel.textContent = donorsExpanded
+      ? 'Свернуть список'
+      : 'Развернуть список';
+  }
+
+  donorsToggle.addEventListener('click', () => {
+    donorsExpanded = !donorsExpanded;
+    renderDonors();
+  });
+
   async function loadDonors() {
     try {
       const url = new URL(donorsCsvUrl);
-    url.searchParams.set('_', Date.now());
+      url.searchParams.set('_', Date.now());
 
-    const response = await fetch(url, { cache: 'no-store' });
+      const response = await fetch(url, { cache: 'no-store' });
 
-    if (!response.ok) {
-      throw new Error(`Google вернул HTTP ${response.status}`);
-    }
+      if (!response.ok) {
+        throw new Error(`Google вернул HTTP ${response.status}`);
+      }
 
-    const csv = await response.text();
+      const csv = await response.text();
       const rows = parseCsv(csv.replace(/^\uFEFF/, ''));
 
       if (rows.length < 2) {
@@ -1993,6 +2050,7 @@ document.getElementById('yookassaCustomerNumber').value = donorNameValue;
         statCount.textContent = '0';
         donorsList.innerHTML =
           '<tr><td colspan="3">Пока нет записей</td></tr>';
+        donorsToggle.hidden = true;
         return;
       }
 
@@ -2014,58 +2072,50 @@ document.getElementById('yookassaCustomerNumber').value = donorNameValue;
         );
       }
 
+      // Google Таблица содержит записи от старых к новым.
+      // Разворачиваем массив, чтобы последние пожертвования были первыми.
       const validDonations = rows.slice(1)
-  .map(row => ({
-    name: (row[nameIndex] || '').trim(),
-    date: (row[dateIndex] || '').trim(),
-    amountText: (row[amountIndex] || '').trim(),
-    amount: parseDonationAmount(row[amountIndex])
-  }))
-  .filter(item => item.name && item.amount !== null)
-  .reverse();
+        .map(row => ({
+          name: (row[nameIndex] || '').trim(),
+          date: (row[dateIndex] || '').trim(),
+          amountText: (row[amountIndex] || '').trim(),
+          amount: parseDonationAmount(row[amountIndex])
+        }))
+        .filter(item => item.name && item.amount !== null)
+        .reverse();
 
-const total = validDonations.reduce(
-  (sum, item) => sum + item.amount,
-  0
-);
+      const total = validDonations.reduce(
+        (sum, item) => sum + item.amount,
+        0
+      );
 
-totalValue.textContent =
-  `${new Intl.NumberFormat('ru-RU', {
-    maximumFractionDigits: 2
-  }).format(total)} ₽`;
+      totalValue.textContent =
+        `${new Intl.NumberFormat('ru-RU', {
+          maximumFractionDigits: 2
+        }).format(total)} ₽`;
 
-statCount.textContent =
-  new Intl.NumberFormat('ru-RU').format(validDonations.length);
+      statCount.textContent =
+        new Intl.NumberFormat('ru-RU').format(validDonations.length);
 
-if (validDonations.length === 0) {
-  donorsList.innerHTML =
-    '<tr><td colspan="3">Пока нет благотворителей</td></tr>';
-  return;
-}
+      if (validDonations.length === 0) {
+        donorsList.innerHTML =
+          '<tr><td colspan="3">Пока нет благотворителей</td></tr>';
+        donorsToggle.hidden = true;
+        return;
+      }
 
-donorsList.innerHTML = validDonations.map(({ name, date, amountText }) => {
-  const initial = [...name][0] || '?';
+      // В полном списке показываем не более 15 последних благотворителей.
+      donorsToShow = validDonations.slice(0, DONORS_EXPANDED_LIMIT);
+      donorsExpanded = false;
+      renderDonors();
 
-  return `
-    <tr>
-      <td>
-        <span class="donor-name">
-          <span class="donor-avatar">${escapeHtml(initial)}</span>
-          <span class="donor-info"><span>${escapeHtml(name)}</span></span>
-        </span>
-      </td>
-      <td>${escapeHtml(date)}</td>
-      <td>${escapeHtml(amountText)}</td>
-    </tr>
-  `;
-}).join('');
-      
     } catch (error) {
       console.error('Не удалось загрузить Google Таблицу:', error);
       totalValue.textContent = '—';
       statCount.textContent = '—';
       donorsList.innerHTML =
         '<tr><td colspan="3">Не удалось загрузить список благотворителей.</td></tr>';
+      donorsToggle.hidden = true;
     }
   }
 
