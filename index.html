@@ -2086,9 +2086,9 @@ h2 {
         .reverse();
 
       const total = validDonations.reduce(
-        (sum, item) => sum + item.amount,
-        0
-      );
+  (sum, item) => sum + item.amount,
+  0
+) * 0.78;
 
       totalValue.textContent =
         `${new Intl.NumberFormat('ru-RU', {
