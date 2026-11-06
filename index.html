@@ -1995,38 +1995,44 @@ h2 {
     return Number.isFinite(amount) && amount >= 0 ? amount : null;
   }
 
-  function renderDonors() {
-    const visibleDonors = donorsExpanded
-      ? donorsToShow.slice(0, DONORS_EXPANDED_LIMIT)
-      : donorsToShow.slice(0, DONORS_COLLAPSED_LIMIT);
+  function formatRubles(amount) {
+  return new Intl.NumberFormat('ru-RU', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(amount) + ' ₽';
+}
 
-    donorsList.innerHTML = visibleDonors.map(({ name, date, amountText }) => {
-      const initial = [...name][0] || '?';
+function renderDonors() {
+  const visibleDonors = donorsExpanded
+    ? donorsToShow.slice(0, DONORS_EXPANDED_LIMIT)
+    : donorsToShow.slice(0, DONORS_COLLAPSED_LIMIT);
 
-      return `
-        <tr>
-          <td>
-            <span class="donor-name">
-              <span class="donor-avatar">${escapeHtml(initial)}</span>
-              <span class="donor-info"><span>${escapeHtml(name)}</span></span>
-            </span>
-          </td>
-          <td>${escapeHtml(date)}</td>
-          <td>${escapeHtml(amountText)}</td>
-        </tr>
-      `;
-    }).join('');
+  donorsList.innerHTML = visibleDonors.map(({ name, date, amount }) => {
+    const initial = [...name][0] || '?';
 
-    const hasMoreThanCollapsedLimit =
-      donorsToShow.length > DONORS_COLLAPSED_LIMIT;
+    return `
+      <tr>
+        <td>
+          <span class="donor-name">
+            <span class="donor-avatar">${escapeHtml(initial)}</span>
+            <span class="donor-info"><span>${escapeHtml(name)}</span></span>
+          </span>
+        </td>
+        <td>${escapeHtml(date)}</td>
+        <td>${formatRubles(amount)}</td>
+      </tr>
+    `;
+  }).join('');
 
-    donorsToggle.hidden = !hasMoreThanCollapsedLimit;
-    donorsToggle.setAttribute('aria-expanded', String(donorsExpanded));
-    donorsToggleLabel.textContent = donorsExpanded
-      ? 'Свернуть список'
-      : 'Развернуть список';
-  }
+  const hasMoreThanCollapsedLimit =
+    donorsToShow.length > DONORS_COLLAPSED_LIMIT;
 
+  donorsToggle.hidden = !hasMoreThanCollapsedLimit;
+  donorsToggle.setAttribute('aria-expanded', String(donorsExpanded));
+  donorsToggleLabel.textContent = donorsExpanded
+    ? 'Свернуть список'
+    : 'Развернуть список';
+}
   donorsToggle.addEventListener('click', () => {
     donorsExpanded = !donorsExpanded;
     renderDonors();
