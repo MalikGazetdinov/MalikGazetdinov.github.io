@@ -967,28 +967,17 @@ h2 {
   font-size: 1.6rem;
   color: var(--gold-400);
   margin-bottom: 18px;
-  position: relative;
-  z-index: 1;
 }
 
 .cta h2 {
   color: var(--sand-50);
   margin-bottom: 14px;
-  position: relative;
-  z-index: 1;
 }
 
 .cta p {
   color: rgba(250, 247, 240, .8);
   max-width: 34em;
   margin: 0 auto 30px;
-  position: relative;
-  z-index: 1;
-}
-
-.cta .btn {
-  position: relative;
-  z-index: 1;
 }
 
 .footer {
@@ -1386,8 +1375,8 @@ h2 {
   <div class="container header__inner">
     <a class="logo" href="#" aria-label="Пробуждение уммы — на главную">
       <span class="logo__mark">
-  <img src="icon.png" width="42" height="42" alt="Иконка">
-</span>
+        <img src="icon.png" width="42" height="42" alt="Иконка">
+      </span>
       <span class="logo__name">Пробуждение уммы</span>
     </a>
 
@@ -1399,44 +1388,24 @@ h2 {
 
     <a href="#donate" class="btn btn--gold">Поддержать проект</a>
 
-    <button
-      class="burger"
-      id="burger"
-      type="button"
-      aria-label="Открыть меню"
-      aria-expanded="false"
-      aria-controls="mobileMenu"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
+    <button class="burger" id="burger" type="button"
+      aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
 <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
 
-<aside
-  class="mobile-menu"
-  id="mobileMenu"
-  aria-label="Мобильная навигация"
-  aria-hidden="true"
-  inert
->
+<aside class="mobile-menu" id="mobileMenu" aria-label="Мобильная навигация"
+  aria-hidden="true" inert>
   <div class="mobile-menu__header">
     <a class="logo" href="#" aria-label="Пробуждение уммы — на главную">
-      <span class="logo__mark">
-  <img src="icon.png" alt="Иконка">
-</span>
+      <span class="logo__mark"><img src="icon.png" alt="Иконка"></span>
       <span class="logo__name">Пробуждение уммы</span>
     </a>
-
-    <button
-      class="mobile-menu__close"
-      id="menuClose"
-      type="button"
-      aria-label="Закрыть меню"
-    >&times;</button>
+    <button class="mobile-menu__close" id="menuClose" type="button"
+      aria-label="Закрыть меню">&times;</button>
   </div>
 
   <nav class="mobile-menu__nav" aria-label="Разделы сайта">
@@ -1447,14 +1416,12 @@ h2 {
   </nav>
 
   <nav class="mobile-menu__legal" aria-label="Правовая информация">
-      <a href="https://malikgazetdinov.github.io/yslovia.html">Условия пожертвования</a>
-      <a href="https://malikgazetdinov.github.io/police.html">Политика обработки персональных данных</a>
-      <a href="https://malikgazetdinov.github.io/otcheti.html">Отчеты о сборе</a>
+    <a href="https://malikgazetdinov.github.io/yslovia.html">Условия пожертвования</a>
+    <a href="https://malikgazetdinov.github.io/police.html">Политика обработки персональных данных</a>
+    <a href="https://malikgazetdinov.github.io/otcheti.html">Отчеты о сборе</a>
   </nav>
 
-  <div class="mobile-menu__footer">
-    Принеси пользу, распространив Ислам
-  </div>
+  <div class="mobile-menu__footer">Принеси пользу, распространив Ислам</div>
 </aside>
 
 <main>
@@ -1464,7 +1431,6 @@ h2 {
     <div class="container hero__inner">
       <div>
         <div class="hero__salam">Инвестиция в Ислам</div>
-
         <h1>Стань причиной <em>процветания</em> Ислама</h1>
 
         <p class="hero__lead">
@@ -1504,26 +1470,12 @@ h2 {
         </div>
 
         <label class="sr-only" for="customAmount">Своя сумма в рублях</label>
-        <input
-          class="amount-input"
-          id="customAmount"
-          type="number"
-          min="1"
-          step="1"
-          placeholder="Своя сумма в рублях"
-          inputmode="numeric"
-          autocomplete="off"
-        >
+        <input class="amount-input" id="customAmount" type="number" min="1" step="1"
+          placeholder="Своя сумма в рублях" inputmode="numeric" autocomplete="off">
 
         <label class="sr-only" for="donorName">Ваше имя</label>
-        <input
-          class="donor-name-input"
-          id="donorName"
-          type="text"
-          maxlength="100"
-          placeholder="Ваше имя (необязательно)"
-          autocomplete="name"
-        >
+        <input class="donor-name-input" id="donorName" type="text" maxlength="100"
+          placeholder="Ваше имя (необязательно)" autocomplete="name">
 
         <button class="btn btn--gold" id="donateBtn" type="button">Продолжить ✦</button>
 
@@ -1542,44 +1494,30 @@ h2 {
         </p>
       </aside>
 
-      <form
-        id="yookassaForm"
+      <form id="yookassaForm"
         class="yoomoney-payment-form yookassa-form-hidden"
         action="https://yookassa.ru/integration/simplepay/payment"
-        method="post"
-        accept-charset="utf-8"
-        aria-hidden="true"
-        tabindex="-1"
-      >
+        method="post" accept-charset="utf-8" aria-hidden="true" tabindex="-1">
         <div class="ym-customer-info">
           <div class="ym-block-title">О покупателе</div>
-          <input
-            name="custName"
-            id="yookassaCustName"
-            class="ym-input"
-            placeholder="ФИО"
-            type="text"
-            value=""
-          >
+          <input name="custName" id="yookassaCustName" class="ym-input"
+            placeholder="ФИО" type="text" value="">
         </div>
 
         <div class="ym-hidden-inputs">
-          <input name="shopSuccessURL" type="hidden" value="https://malikgazetdinov.github.io/correct.htm">
-          <input name="shopFailURL" type="hidden" value="https://malikgazetdinov.github.io/nocorrect.htm">
+          <input name="shopSuccessURL" type="hidden"
+            value="https://malikgazetdinov.github.io/correct.htm">
+          <input name="shopFailURL" type="hidden"
+            value="https://malikgazetdinov.github.io/nocorrect.htm">
         </div>
 
-        <input name="customerNumber" type="hidden" value="Благотворительность на распространение Ислама">
+        <input name="customerNumber" type="hidden"
+          value="Благотворительность на распространение Ислама">
 
         <div class="ym-payment-btn-block ym-before-line ym-align-space-between">
           <div class="ym-input-icon-rub">
-            <input
-              name="sum"
-              id="yookassaSum"
-              placeholder="0.00"
-              class="ym-input ym-sum-input ym-required-input"
-              type="number"
-              step="any"
-            >
+            <input name="sum" id="yookassaSum" placeholder="0.00"
+              class="ym-input ym-sum-input ym-required-input" type="number" step="any">
           </div>
 
           <button data-text="Продолжить" class="ym-btn-pay ym-result-price" type="submit">
@@ -1587,13 +1525,8 @@ h2 {
             <span class="ym-price-output"></span>
           </button>
 
-          <img
-            src="https://yookassa.ru/integration/simplepay/img/iokassa-gray.svg?v=1.37.0"
-            class="ym-logo"
-            width="114"
-            height="27"
-            alt="ЮKassa"
-          >
+          <img src="https://yookassa.ru/integration/simplepay/img/iokassa-gray.svg?v=1.37.0"
+            class="ym-logo" width="114" height="27" alt="ЮKassa">
         </div>
 
         <input name="shopId" type="hidden" value="1475662">
@@ -1627,18 +1560,12 @@ h2 {
               <p>Сделать такой вклад — это просто и по силам каждому. Пусть Аллах примет ваше доброе намерение, благословит ваши усилия и воздаст вам многократно. Аминь.</p>
             </div>
 
-            <button
-              class="about__toggle"
-              id="aboutToggle"
-              type="button"
-              aria-expanded="false"
-              aria-controls="aboutScroll"
-            >
+            <button class="about__toggle" id="aboutToggle" type="button"
+              aria-expanded="false" aria-controls="aboutScroll">
               <span class="about__toggle-label">Развернуть текст</span>
-              <svg width="16" height="16" viewBox="0 0 24 24"
-                   fill="none" stroke="currentColor" stroke-width="2.5"
-                   stroke-linecap="round" stroke-linejoin="round"
-                   aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
                 <path d="m6 9 6 6 6-6"/>
               </svg>
             </button>
@@ -1708,21 +1635,12 @@ h2 {
             <th style="text-align:right">Сумма</th>
           </tr>
         </thead>
-        <tbody>
-          <!--
-          <tr>
-            <td>
-              <span class="donor-name">
-                <span class="donor-avatar">Т</span>
-                <span class="donor-info"><span>Тимур</span></span>
-              </span>
-            </td>
-            <td>13 января 2027 г.</td>
-            <td>500 ₽</td>
-          </tr>
-          -->
+        <tbody id="donorsList">
+          <tr><td colspan="3">Загружаем список…</td></tr>
         </tbody>
       </table>
+
+      <p class="donors-note">Пожертвования отображаются с согласия благотворителей.</p>
     </div>
   </section>
 </main>
@@ -1731,77 +1649,67 @@ h2 {
   <div class="container">
     <div class="footer__bottom">
       <div class="footer__contacts">
-        <p class="contact-item">
-          <strong>Организатор:</strong>
-          <span>Газетдинов Малик Равилевич</span>
-        </p>
-        <p class="contact-item">
-          <strong>ИНН:</strong>
-          <span>022541182185</span>
-        </p>
-        <p class="contact-item">
-          <strong>Телефон:</strong>
-          <a href="tel:+79870472410" class="contact-link">+7 (987) 047-24-10</a>
-        </p>
-        <p class="contact-item">
-          <strong>Почта:</strong>
-          <a href="mailto:malik.gazetdinot@gmail.com" class="contact-link">malik.gazetdinot@gmail.com</a>
-        </p>
+        <p class="contact-item"><strong>Организатор:</strong> <span>Газетдинов Малик Равилевич</span></p>
+        <p class="contact-item"><strong>ИНН:</strong> <span>022541182185</span></p>
+        <p class="contact-item"><strong>Телефон:</strong>
+          <a href="tel:+79870472410" class="contact-link">+7 (987) 047-24-10</a></p>
+        <p class="contact-item"><strong>Почта:</strong>
+          <a href="mailto:malik.gazetdinot@gmail.com" class="contact-link">malik.gazetdinot@gmail.com</a></p>
       </div>
 
       <div class="footer__socials">
         <h4 class="socials__title">Мы в соцсетях и мессенджерах</h4>
         <div class="socials__links">
           <a href="https://youtube.com/@sohyatyl_umma?si=0F7qbrKuWtpiNpP7"
-             class="social-link" target="_blank" rel="noopener noreferrer"
-             title="YouTube" aria-label="Наш канал на YouTube">
+            class="social-link" target="_blank" rel="noopener noreferrer"
+            title="YouTube" aria-label="Наш канал на YouTube">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
-                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136
-                       C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505
-                       A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12
-                       s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136
-                       c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505
-                       a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12
-                       s0-3.93-.502-5.814z" fill="#FF0000"/>
+                C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505
+                A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12
+                s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136
+                c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505
+                a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12
+                s0-3.93-.502-5.814z" fill="#FF0000"/>
               <path d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#fff"/>
             </svg>
           </a>
 
           <a href="https://max.ru/u/f9LHodD0cOKe9vKxf4bN5Ofbz8H_P5ukEnzDrKprkkSVMRFxW72guGtdzm8"
-             class="social-link" target="_blank" rel="noopener noreferrer"
-             title="Чат в MAX" aria-label="Чат в MAX">
+            class="social-link" target="_blank" rel="noopener noreferrer"
+            title="Чат в MAX" aria-label="Чат в MAX">
             <svg width="40" height="40" viewBox="0 0 40 40"
-                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <defs>
                 <linearGradient id="maxGrad" x1="0" y1="0" x2="40" y2="40"
-                                gradientUnits="userSpaceOnUse">
+                  gradientUnits="userSpaceOnUse">
                   <stop stop-color="#471AFF"/>
                   <stop offset="1" stop-color="#9500FF"/>
                 </linearGradient>
               </defs>
               <rect width="40" height="40" rx="8" fill="url(#maxGrad)"/>
               <path d="M20 8.5c-6.1 0-11 4.1-11 9.2 0 2.9 1.6 5.5 4.1 7.3l-1.1 5.3 5.1-1.9c.9.2 1.9.3 2.9.3 6.1 0 11-4.1 11-9.2S26.1 8.5 20 8.5Z"
-                    fill="none" stroke="#fff" stroke-width="2.2"
-                    stroke-linecap="round" stroke-linejoin="round"/>
+                fill="none" stroke="#fff" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
 
           <a href="https://t.me/Malik987123" class="social-link" target="_blank"
-             rel="noopener noreferrer" title="Telegram" aria-label="Наш Telegram">
+            rel="noopener noreferrer" title="Telegram" aria-label="Наш Telegram">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
-                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <circle cx="12" cy="12" r="12" fill="#26A5E4"/>
-              <path d="M16.906 7.224c.1-.002.321.023.465.14a.506.506 0 0 1
-                       .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36
-                       8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902
-                       -1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91
-                       .177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212
-                       s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061
-                       3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44
-                       -.752-.26-1.349-.398-1.297-.841.028-.24.387-.496 1.063-.752
-                       4.148-1.807 6.912-2.998 8.292-3.573 1.958-.814 2.365-.954
-                       2.63-.96z" fill="#fff"/>
+              <path d="M16.906 7.224c.1-.002.321.023.465.14a.506.506 0 0
+                1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36
+                8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902
+                -1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91
+                .177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212
+                s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061
+                3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44
+                -.752-.26-1.349-.398-1.297-.841.028-.24.387-.496 1.063-.752
+                4.148-1.807 6.912-2.998 8.292-3.573 1.958-.814 2.365-.954
+                2.63-.96z" fill="#fff"/>
             </svg>
           </a>
         </div>
@@ -1854,19 +1762,13 @@ h2 {
     burger.setAttribute('aria-expanded', 'false');
     burger.setAttribute('aria-label', 'Открыть меню');
 
-    if (restoreFocus) {
-      burger.focus();
-    }
+    if (restoreFocus) burger.focus();
   }
 
   burger.addEventListener('click', () => {
-    const isOpen = burger.getAttribute('aria-expanded') === 'true';
-
-    if (isOpen) {
-      closeMobileMenu();
-    } else {
-      openMobileMenu();
-    }
+    burger.getAttribute('aria-expanded') === 'true'
+      ? closeMobileMenu()
+      : openMobileMenu();
   });
 
   menuClose.addEventListener('click', () => closeMobileMenu());
@@ -1877,7 +1779,8 @@ h2 {
   });
 
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true') {
+    if (event.key === 'Escape' &&
+        burger.getAttribute('aria-expanded') === 'true') {
       closeMobileMenu();
     }
   });
@@ -1886,13 +1789,15 @@ h2 {
 
   if (desktopMedia.addEventListener) {
     desktopMedia.addEventListener('change', event => {
-      if (event.matches && burger.getAttribute('aria-expanded') === 'true') {
+      if (event.matches &&
+          burger.getAttribute('aria-expanded') === 'true') {
         closeMobileMenu({ restoreFocus: false });
       }
     });
   } else {
     desktopMedia.addListener(event => {
-      if (event.matches && burger.getAttribute('aria-expanded') === 'true') {
+      if (event.matches &&
+          burger.getAttribute('aria-expanded') === 'true') {
         closeMobileMenu({ restoreFocus: false });
       }
     });
@@ -2002,6 +1907,130 @@ h2 {
       ? 'Свернуть текст'
       : 'Развернуть текст';
   });
+
+  // Загрузка благотворителей из опубликованной Google Таблицы
+    // Загрузка благотворителей из Google Таблицы
+  const donorsCsvUrl =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRxAabXWF7N8IzMFsXZ7j4y2q0m-1ft6YJ8NjGCwL-WpCmevZMSnKlDBUttmFlN-_QHKrJ2BzlmGx0W/pub?output=csv';
+
+  const donorsList = document.getElementById('donorsList');
+
+  function parseCsv(csv) {
+    const rows = [];
+    let row = [];
+    let cell = '';
+    let quoted = false;
+
+    for (let i = 0; i < csv.length; i++) {
+      const char = csv[i];
+      const next = csv[i + 1];
+
+      if (char === '"' && quoted && next === '"') {
+        cell += '"';
+        i++;
+      } else if (char === '"') {
+        quoted = !quoted;
+      } else if (char === ',' && !quoted) {
+        row.push(cell.trim());
+        cell = '';
+      } else if ((char === '\n' || char === '\r') && !quoted) {
+        if (char === '\r' && next === '\n') i++;
+        row.push(cell.trim());
+        if (row.some(value => value !== '')) rows.push(row);
+        row = [];
+        cell = '';
+      } else {
+        cell += char;
+      }
+    }
+
+    row.push(cell.trim());
+    if (row.some(value => value !== '')) rows.push(row);
+    return rows;
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, char => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    })[char]);
+  }
+
+  async function loadDonors() {
+    try {
+      const response = await fetch(donorsCsvUrl);
+
+      if (!response.ok) {
+        throw new Error(`Google вернул HTTP ${response.status}`);
+      }
+
+      const csv = await response.text();
+      const rows = parseCsv(csv.replace(/^\uFEFF/, ''));
+
+      if (rows.length < 2) {
+        donorsList.innerHTML =
+          '<tr><td colspan="3">Пока нет записей</td></tr>';
+        return;
+      }
+
+      const headers = rows[0].map(header =>
+        header.trim().toLowerCase()
+      );
+
+      const nameIndex = headers.findIndex(header => header.includes('имя'));
+      const dateIndex = headers.findIndex(header =>
+        header.includes('дата') || header.includes('время')
+      );
+      const amountIndex = headers.findIndex(header =>
+        header.includes('сумма')
+      );
+
+      if (nameIndex === -1 || dateIndex === -1 || amountIndex === -1) {
+        throw new Error(
+          `Не найдены заголовки Имя/Дата/Сумма. Получены заголовки: ${headers.join(', ')}`
+        );
+      }
+
+      const donors = rows.slice(1).filter(row =>
+        row.some(value => value.trim() !== '')
+      );
+
+      if (!donors.length) {
+        donorsList.innerHTML =
+          '<tr><td colspan="3">Пока нет записей</td></tr>';
+        return;
+      }
+
+      donorsList.innerHTML = donors.map(row => {
+        const name = row[nameIndex] || 'Благотворитель';
+        const date = row[dateIndex] || '';
+        const amount = row[amountIndex] || '';
+        const initial = [...name.trim()][0] || '?';
+
+        return `
+          <tr>
+            <td>
+              <span class="donor-name">
+                <span class="donor-avatar">${escapeHtml(initial)}</span>
+                <span class="donor-info"><span>${escapeHtml(name)}</span></span>
+              </span>
+            </td>
+            <td>${escapeHtml(date)}</td>
+            <td>${escapeHtml(amount)}</td>
+          </tr>
+        `;
+      }).join('');
+    } catch (error) {
+      console.error('Не удалось загрузить Google Таблицу:', error);
+      donorsList.innerHTML =
+        '<tr><td colspan="3">Не удалось загрузить список. Проверьте консоль браузера.</td></tr>';
+    }
+  }
+
+  loadDonors();
 </script>
 
 </body>
