@@ -885,6 +885,8 @@ main {
 
       if (donations.length === 0) {
         reportStatusElement.textContent = 'В базе данных пока нет записей о пожертвованиях.';
+      } else {
+        reportStatusElement.textContent = 'Данные на настоящий момент.';
       }
 
       console.info('Сводка отчёта:', summary);
