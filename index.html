@@ -2014,10 +2014,6 @@ document.getElementById('yookassaCustomerNumber').value = donorNameValue;
         );
       }
 
-      const donors = rows.slice(1).filter(row =>
-        row.some(value => value.trim() !== '')
-      );
-
       const validDonations = rows.slice(1)
   .map(row => ({
     name: (row[nameIndex] || '').trim(),
@@ -2043,7 +2039,7 @@ statCount.textContent =
 
 if (validDonations.length === 0) {
   donorsList.innerHTML =
-    '<tr><td colspan="3">Пока нет записей</td></tr>';
+    '<tr><td colspan="3">Пока нет благотворителей</td></tr>';
   return;
 }
 
@@ -2063,32 +2059,7 @@ donorsList.innerHTML = validDonations.map(({ name, date, amountText }) => {
     </tr>
   `;
 }).join('');
-
-      if (!donors.length) {
-        donorsList.innerHTML =
-          '<tr><td colspan="3">Пока нет записей</td></tr>';
-        return;
-      }
-
-      donorsList.innerHTML = donors.map(row => {
-        const name = (row[nameIndex] || '').trim() || 'Благотворитель';
-        const date = row[dateIndex] || '';
-        const amount = row[amountIndex] || '';
-        const initial = [...name][0] || '?';
-
-        return `
-          <tr>
-            <td>
-              <span class="donor-name">
-                <span class="donor-avatar">${escapeHtml(initial)}</span>
-                <span class="donor-info"><span>${escapeHtml(name)}</span></span>
-              </span>
-            </td>
-            <td>${escapeHtml(date)}</td>
-            <td>${escapeHtml(amount)}</td>
-          </tr>
-        `;
-      }).join('');
+      
     } catch (error) {
       console.error('Не удалось загрузить Google Таблицу:', error);
       totalValue.textContent = '—';
