@@ -102,11 +102,18 @@ a {
   display: grid;
   place-items: center;
   flex: none;
+  overflow: hidden;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--emerald-700), var(--emerald-900));
   color: var(--gold-400);
   font-family: var(--font-arabic);
   font-size: 1.45rem;
+}
+
+.logo__mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .logo__name {
@@ -144,7 +151,7 @@ a {
   color: var(--gold-400);
 }
 
-/* Верхний блок страницы */
+/* Верхний блок */
 .page-hero {
   position: relative;
   overflow: hidden;
@@ -555,8 +562,8 @@ main {
   <div class="container header__inner">
     <a class="logo" href="index.htm" aria-label="Пробуждение уммы — главная">
       <span class="logo__mark">
-  <img src="icon.png" width="42" height="42" alt="Иконка">
-</span>
+        <img src="icon.png" width="42" height="42" alt="Иконка">
+      </span>
       <span class="logo__name">Пробуждение уммы</span>
     </a>
 
@@ -610,24 +617,25 @@ main {
 
     <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-card__value">0 ₽</div>
-        <div class="stat-card__label">Собрано</div>
+        <div class="stat-card__value" id="totalCollected" aria-live="polite">Загружаем…</div>
       </div>
+
       <div class="stat-card">
-        <div class="stat-card__value">0 ₽</div>
+        <div class="stat-card__value" id="totalExpenses">—</div>
         <div class="stat-card__label">Использовано</div>
       </div>
+
       <div class="stat-card">
-        <div class="stat-card__value">0 ₽</div>
+        <div class="stat-card__value" id="balance">—</div>
         <div class="stat-card__label">Остаток</div>
       </div>
     </div>
 
-    <p>Количество пожертвований: <strong>0</strong></p>
-    <p>Дата последнего обновления: <strong>05.11.2026</strong></p>
+    <p>Количество пожертвований: <strong id="donationCount">Загружаем…</strong></p>
+    <p>Дата последнего обновления: <strong id="lastUpdated">—</strong></p>
 
-    <div class="report-note">
-      Сбор открыт недавно — показатели будут обновляться по мере поступления и использования средств.
+    <div class="report-note" id="reportStatus" aria-live="polite">
+      Загружаются данные о пожертвованиях.
     </div>
   </section>
 
@@ -649,30 +657,30 @@ main {
         <tbody>
           <tr>
             <td data-label="Направление">Печать книг «Свет»</td>
-            <td class="amount" data-label="Сумма расходов"><span class="blank">— ₽</span></td>
-            <td data-label="Комментарий"><span class="blank">—</span></td>
+            <td class="amount" data-label="Сумма расходов"><span class="blank" id="expenseBooks">0 ₽</span></td>
+            <td data-label="Комментарий">Расходы будут указаны по факту.</td>
           </tr>
           <tr>
             <td data-label="Направление">Брошюры «Смысл жизни»</td>
-            <td class="amount" data-label="Сумма расходов"><span class="blank">— ₽</span></td>
-            <td data-label="Комментарий"><span class="blank">—</span></td>
+            <td class="amount" data-label="Сумма расходов"><span class="blank" id="expenseBrochures">0 ₽</span></td>
+            <td data-label="Комментарий">Расходы будут указаны по факту.</td>
           </tr>
           <tr>
             <td data-label="Направление">Иные способы призыва к Исламу</td>
-            <td class="amount" data-label="Сумма расходов"><span class="blank">— ₽</span></td>
-            <td data-label="Комментарий"><span class="blank">—</span></td>
+            <td class="amount" data-label="Сумма расходов"><span class="blank" id="expenseOther">0 ₽</span></td>
+            <td data-label="Комментарий">Расходы будут указаны по факту.</td>
           </tr>
           <tr>
             <td data-label="Направление"><strong>Итого</strong></td>
-            <td class="amount" data-label="Сумма расходов"><strong class="blank">— ₽</strong></td>
-            <td data-label="Комментарий"><span class="blank">—</span></td>
+            <td class="amount" data-label="Сумма расходов"><strong id="expenseTotal">0 ₽</strong></td>
+            <td data-label="Комментарий">Общая сумма расходов.</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <div class="report-note">
-      В таблице отражаются фактически понесённые расходы. Комментарий заполняется организатором по мере появления данных.
+      Таблица расходов обновляется на основании фактически понесённых расходов. В коде сайта суммы в переменной расходов должны соответствовать указанным в таблице.
     </div>
   </section>
 
@@ -708,6 +716,201 @@ main {
     <p>© 2026 Проект «Пробуждение уммы»</p>
   </div>
 </footer>
+
+<script>
+  /*
+   * Укажите фактические расходы здесь, в рублях.
+   * При изменении расходов обновите значения ниже и суммы в таблице.
+   */
+  const EXPENSES = {
+    books: 0,
+    brochures: 0,
+    other: 0
+  };
+
+  // Коэффициент для расчёта отображаемой суммы пожертвований.
+  const COLLECTION_COEFFICIENT = 0.78;
+
+  // Публичная CSV-ссылка на ту же Google Таблицу, что используется для списка доноров.
+  const DONORS_CSV_URL =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vRxAabXWF7N8IzMFsXZ7j4y2q0m-1ft6YJ8NjGCwL-WpCmevZMSnKlDBUttmFlN-_QHKrJ2BzlmGx0W/pub?output=csv';
+
+  const totalCollectedElement = document.getElementById('totalCollected');
+  const totalExpensesElement = document.getElementById('totalExpenses');
+  const balanceElement = document.getElementById('balance');
+  const donationCountElement = document.getElementById('donationCount');
+  const lastUpdatedElement = document.getElementById('lastUpdated');
+  const reportStatusElement = document.getElementById('reportStatus');
+
+  const currencyFormatter = new Intl.NumberFormat('ru-RU', {
+    style: 'currency',
+    currency: 'RUB',
+    maximumFractionDigits: 2
+  });
+
+  function formatCurrency(value) {
+    return currencyFormatter.format(value);
+  }
+
+  function parseCSV(csv) {
+    const rows = [];
+    let row = [];
+    let cell = '';
+    let inQuotes = false;
+
+    for (let i = 0; i < csv.length; i++) {
+      const char = csv[i];
+      const next = csv[i + 1];
+
+      if (char === '"' && inQuotes && next === '"') {
+        cell += '"';
+        i++;
+      } else if (char === '"') {
+        inQuotes = !inQuotes;
+      } else if (char === ',' && !inQuotes) {
+        row.push(cell.trim());
+        cell = '';
+      } else if ((char === '\n' || char === '\r') && !inQuotes) {
+        if (char === '\r' && next === '\n') i++;
+
+        row.push(cell.trim());
+
+        if (row.some(value => value !== '')) {
+          rows.push(row);
+        }
+
+        row = [];
+        cell = '';
+      } else {
+        cell += char;
+      }
+    }
+
+    row.push(cell.trim());
+
+    if (row.some(value => value !== '')) {
+      rows.push(row);
+    }
+
+    return rows;
+  }
+
+  function parseDonationAmount(value) {
+    const normalized = String(value ?? '')
+      .replace(/\u00A0/g, ' ')
+      .replace(/[^\d,.-]/g, '')
+      .replace(',', '.');
+
+    if (!normalized || !/\d/.test(normalized)) {
+      return null;
+    }
+
+    const amount = Number(normalized);
+    return Number.isFinite(amount) && amount >= 0 ? amount : null;
+  }
+
+  function renderExpenses() {
+    const books = Number(EXPENSES.books) || 0;
+    const brochures = Number(EXPENSES.brochures) || 0;
+    const other = Number(EXPENSES.other) || 0;
+    const totalExpenses = books + brochures + other;
+
+    document.getElementById('expenseBooks').textContent = formatCurrency(books);
+    document.getElementById('expenseBrochures').textContent = formatCurrency(brochures);
+    document.getElementById('expenseOther').textContent = formatCurrency(other);
+    document.getElementById('expenseTotal').textContent = formatCurrency(totalExpenses);
+    totalExpensesElement.textContent = formatCurrency(totalExpenses);
+
+    return totalExpenses;
+  }
+
+  function renderSummary(grossTotal, donationCount) {
+    const adjustedTotal = grossTotal * COLLECTION_COEFFICIENT;
+    const expenses = renderExpenses();
+    const remaining = adjustedTotal - expenses;
+
+    totalCollectedElement.textContent = formatCurrency(adjustedTotal);
+    balanceElement.textContent = formatCurrency(remaining);
+    donationCountElement.textContent =
+      new Intl.NumberFormat('ru-RU').format(donationCount);
+
+    return { adjustedTotal, expenses, remaining };
+  }
+
+  async function loadReportData() {
+    try {
+      const url = new URL(DONORS_CSV_URL);
+      url.searchParams.set('_', Date.now());
+
+      const response = await fetch(url, { cache: 'no-store' });
+
+      if (!response.ok) {
+        throw new Error(`Google Таблица вернула HTTP ${response.status}`);
+      }
+
+      const csv = (await response.text()).replace(/^\uFEFF/, '');
+      const rows = parseCSV(csv);
+
+      if (rows.length < 2) {
+        renderSummary(0, 0);
+        reportStatusElement.textContent = 'В таблице пока нет записей о пожертвованиях.';
+        lastUpdatedElement.textContent =
+          new Intl.DateTimeFormat('ru-RU').format(new Date());
+        return;
+      }
+
+      const headers = rows[0].map(value => value.trim().toLowerCase());
+
+      const amountIndex = headers.findIndex(header => header.includes('сумма'));
+
+      if (amountIndex === -1) {
+        throw new Error('В Google Таблице не найден столбец с заголовком «Сумма».');
+      }
+
+      const donations = rows.slice(1)
+        .map(row => parseDonationAmount(row[amountIndex]))
+        .filter(amount => amount !== null);
+
+      const grossTotal = donations.reduce((sum, amount) => sum + amount, 0);
+      const summary = renderSummary(grossTotal, donations.length);
+
+      const updatedAt = new Intl.DateTimeFormat('ru-RU', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      }).format(new Date());
+
+      lastUpdatedElement.textContent = updatedAt;
+
+      if (donations.length === 0) {
+        reportStatusElement.textContent = 'В таблице пока нет записей о пожертвованиях.';
+      } else {
+        reportStatusElement.textContent =
+          `Сумма поступлений рассчитана с коэффициентом ${COLLECTION_COEFFICIENT}. ` +
+          `Остаток рассчитан автоматически: собранная сумма минус расходы.`;
+      }
+
+      console.info('Сводка отчёта:', summary);
+
+    } catch (error) {
+      console.error('Ошибка загрузки данных отчёта:', error);
+
+      totalCollectedElement.textContent = 'Не удалось загрузить';
+      donationCountElement.textContent = '—';
+      lastUpdatedElement.textContent = '—';
+
+      const expenses = renderExpenses();
+      totalExpensesElement.textContent = formatCurrency(expenses);
+      balanceElement.textContent = '—';
+
+      reportStatusElement.textContent =
+        'Не удалось загрузить данные о пожертвованиях. Проверьте CSV-ссылку и доступность опубликованной Google Таблицы.';
+    }
+  }
+
+  renderExpenses();
+  loadReportData();
+</script>
 
 </body>
 </html>
