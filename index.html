@@ -126,10 +126,17 @@ a {
   border-radius: 50%;
   display: grid;
   place-items: center;
+  overflow: hidden;
   background: linear-gradient(135deg, var(--emerald-700), var(--emerald-900));
   color: var(--gold-400);
   font-family: var(--font-arabic);
   font-size: 1.35rem;
+}
+
+.logo__mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .logo__sub {
@@ -227,7 +234,6 @@ a {
   background: var(--sand-50);
   margin: 5px 0;
   border-radius: 2px;
-  transition: .3s;
 }
 
 .menu-overlay {
@@ -453,55 +459,11 @@ a {
   margin-bottom: 18px;
 }
 
-.donate-total {
-  text-align: center;
-  background: linear-gradient(160deg, var(--emerald-950), var(--emerald-800));
-  border-radius: var(--radius-md);
-  padding: 18px 16px 16px;
-  margin-bottom: 6px;
-  overflow: hidden;
-  position: relative;
-}
-
-.donate-total::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(240px 90px at 50% 0%, rgba(201, 162, 39, .28), transparent 70%);
-}
-
-.donate-total__label {
-  display: block;
-  font-size: .72rem;
-  font-weight: 800;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--gold-200);
-  margin-bottom: 6px;
-  position: relative;
-  z-index: 1;
-}
-
-.donate-total__value {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 2.7rem);
-  line-height: 1.1;
-  position: relative;
-  z-index: 1;
-  background: linear-gradient(135deg, var(--gold-200), var(--gold-400) 45%, var(--gold-500));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: var(--gold-400);
-  font-variant-numeric: tabular-nums;
-}
-
 .donate-stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
-  margin: 18px 0 20px;
+  margin: 0 0 20px;
 }
 
 .donate-stats__item {
@@ -526,25 +488,59 @@ a {
   letter-spacing: .06em;
 }
 
+/* Выделенный блок прогресса */
 .goal-progress {
-  margin: 14px 2px 18px;
+  margin: 6px 0 22px;
+  padding: 18px;
+  border: 1px solid rgba(20, 82, 61, .12);
+  border-radius: var(--radius-md);
+  background: var(--sand-50);
 }
 
 .goal-progress__labels {
   display: flex;
   justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 7px;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.goal-progress__amount {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.goal-progress__amount--goal {
+  text-align: right;
+}
+
+.goal-progress__caption {
   color: var(--ink-600);
-  font-size: .72rem;
-  font-weight: 700;
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.goal-progress__amount strong {
+  color: var(--emerald-800);
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 4vw, 1.55rem);
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.goal-progress__amount--goal strong {
+  color: var(--gold-500);
 }
 
 .goal-progress__track {
-  height: 10px;
+  height: 12px;
   overflow: hidden;
   border-radius: 999px;
-  background: var(--sand-100);
+  background: #e5e1d7;
 }
 
 .goal-progress__fill {
@@ -556,9 +552,9 @@ a {
 }
 
 .goal-progress__percent {
-  margin-top: 5px;
+  margin-top: 8px;
   color: var(--emerald-800);
-  font-size: .75rem;
+  font-size: .85rem;
   font-weight: 800;
   text-align: right;
 }
@@ -1138,12 +1134,13 @@ h2 {
 @media (max-width: 960px) {
   .hero__inner {
     grid-template-columns: 1fr;
-    padding: 72px 0 84px;
-    gap: 44px;
+    padding: 52px 0 60px;
+    gap: 32px;
   }
 
   .about__layout {
     grid-template-columns: 1fr;
+    gap: 28px;
   }
 
   .about__aside {
@@ -1153,9 +1150,7 @@ h2 {
   .goals-grid {
     grid-template-columns: 1fr;
   }
-}
 
-@media (max-width: 960px) {
   .header__inner {
     gap: 10px;
     padding-block: 10px;
@@ -1182,11 +1177,6 @@ h2 {
 
   .burger {
     display: block;
-  }
-
-  .hero__inner {
-    padding: 52px 0 60px;
-    gap: 32px;
   }
 
   .hero__salam {
@@ -1226,10 +1216,6 @@ h2 {
     font-size: 1.15rem;
   }
 
-  .donate-stats {
-    grid-template-columns: 1fr 1fr;
-  }
-
   .amounts {
     grid-template-columns: 1fr 1fr;
   }
@@ -1240,10 +1226,6 @@ h2 {
 
   section {
     padding: 64px 0;
-  }
-
-  .about__layout {
-    gap: 28px;
   }
 
   .about__text {
@@ -1388,12 +1370,20 @@ h2 {
     padding: 7px 10px;
   }
 
-  .donate-total__value {
-    font-size: 1.9rem;
-  }
-
   .goal__num {
     font-size: 1.6rem;
+  }
+
+  .goal-progress {
+    padding: 14px 12px;
+  }
+
+  .goal-progress__caption {
+    font-size: .62rem;
+  }
+
+  .goal-progress__amount strong {
+    font-size: 1.05rem;
   }
 }
 
@@ -1489,18 +1479,21 @@ h2 {
       </div>
 
       <aside class="donate-card" id="donate" aria-labelledby="donateTitle">
-        <h2 class="donate-card__title" id="donateTitle">Собрано благотворителями</h2>
-
-        <div class="donate-total">
-          <span class="donate-total__label">Собрано</span>
-          <div class="donate-total__value" id="totalValue" aria-live="polite">Загружаем…</div>
-        </div>
+        <h2 class="donate-card__title" id="donateTitle">Поддержать проект</h2>
 
         <div class="goal-progress">
           <div class="goal-progress__labels">
-            <span id="progressCollected">0 ₽ собрано</span>
-            <span>из 1 000 000 ₽</span>
+            <div class="goal-progress__amount">
+              <span class="goal-progress__caption">Собрано</span>
+              <strong id="progressCollected" aria-live="polite">Загружаем…</strong>
+            </div>
+
+            <div class="goal-progress__amount goal-progress__amount--goal">
+              <span class="goal-progress__caption">Цель сбора</span>
+              <strong>1 000 000 ₽</strong>
+            </div>
           </div>
+
           <div
             class="goal-progress__track"
             role="progressbar"
@@ -1511,6 +1504,7 @@ h2 {
             id="progressTrack">
             <div class="goal-progress__fill" id="progressFill"></div>
           </div>
+
           <div class="goal-progress__percent" id="progressPercent">0%</div>
         </div>
 
@@ -1605,7 +1599,7 @@ h2 {
 
       <div class="about__layout">
         <div>
-          <div class="about__text-wrap reveal" id="aboutTextWrap">
+          <div class="about__text-wrap reveal">
             <div class="about__text" id="aboutScroll">
               <p>Наш век быстрый и непростой: одно сказанное слово за секунды разносится по всему миру. Мы живём в эпоху соцсетей, видеоплатформ и сайтов — и это значит, что голоса, направленные против Ислама, <strong>стремительно увеличиваются</strong>.</p>
               <p>К сожалению, сегодня немало того, что ранит чуткое сердце: несправедливость проникает даже в мелочи — в торговлю, дела, услуги. В городах всё чаще встречаются вещи, которые тревожат верующих: откровенная одежда, алкоголь, азартные игры, кредиты с процентами. Не всегда есть спокойная возможность помолиться в учебных заведениях или на работе. А в составе многих, если не большинства продуктов, — ингредиенты, употребление которых нежелательно или запрещено.</p>
@@ -1730,13 +1724,7 @@ h2 {
             title="YouTube" aria-label="Наш канал на YouTube">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
               xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136
-                C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505
-                A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12
-                s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136
-                c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505
-                a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12
-                s0-3.93-.502-5.814z" fill="#FF0000"/>
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136 C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505 A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12 s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136 c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505 a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12 s0-3.93-.502-5.814z" fill="#FF0000"/>
               <path d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#fff"/>
             </svg>
           </a>
@@ -1747,8 +1735,7 @@ h2 {
             <svg width="40" height="40" viewBox="0 0 40 40"
               xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <defs>
-                <linearGradient id="maxGrad" x1="0" y1="0" x2="40" y2="40"
-                  gradientUnits="userSpaceOnUse">
+                <linearGradient id="maxGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
                   <stop stop-color="#471AFF"/>
                   <stop offset="1" stop-color="#9500FF"/>
                 </linearGradient>
@@ -1765,16 +1752,7 @@ h2 {
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
               xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <circle cx="12" cy="12" r="12" fill="#26A5E4"/>
-              <path d="M16.906 7.224c.1-.002.321.023.465.14a.506.506 0 0
-                1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36
-                8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902
-                -1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91
-                .177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212
-                s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061
-                3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44
-                -.752-.26-1.349-.398-1.297-.841.028-.24.387-.496 1.063-.752
-                4.148-1.807 6.912-2.998 8.292-3.573 1.958-.814 2.365-.954
-                2.63-.96z" fill="#fff"/>
+              <path d="M16.906 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.26-1.349-.398-1.297-.841.028-.24.387-.496 1.063-.752 4.148-1.807 6.912-2.998 8.292-3.573 1.958-.814 2.365-.954 2.63-.96z" fill="#fff"/>
             </svg>
           </a>
         </div>
@@ -1961,7 +1939,7 @@ h2 {
     });
   }
 
-  // Разворачивание текста в разделе «О важном»
+  // Разворачивание текста
   const aboutText = document.getElementById('aboutScroll');
   const aboutToggle = document.getElementById('aboutToggle');
   const aboutToggleLabel = aboutToggle.querySelector('.about__toggle-label');
@@ -1977,22 +1955,33 @@ h2 {
       : 'Развернуть текст';
   });
 
-  // Сбор пожертвований и прогресс-бар
+  // Прогресс сбора
   const GOAL_AMOUNT = 1_000_000;
   const progressCollected = document.getElementById('progressCollected');
   const progressTrack = document.getElementById('progressTrack');
   const progressFill = document.getElementById('progressFill');
   const progressPercent = document.getElementById('progressPercent');
+
   const rubleFormatter = new Intl.NumberFormat('ru-RU', {
     maximumFractionDigits: 2
   });
 
-  // Загрузка благотворителей и расчёт статистики из опубликованной Google Таблицы
+  function updateProgress(total) {
+    const safeTotal = Math.max(Number(total) || 0, 0);
+    const cappedTotal = Math.min(safeTotal, GOAL_AMOUNT);
+    const percent = Math.min((safeTotal / GOAL_AMOUNT) * 100, 100);
+
+    progressCollected.textContent = `${rubleFormatter.format(cappedTotal)} ₽`;
+    progressFill.style.width = `${percent}%`;
+    progressTrack.setAttribute('aria-valuenow', String(Math.round(cappedTotal)));
+    progressPercent.textContent = `${Math.floor(percent)}%`;
+  }
+
+  // Загрузка списка из опубликованной Google Таблицы
   const donorsCsvUrl =
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vRxAabXWF7N8IzMFsXZ7j4y2q0m-1ft6YJ8NjGCwL-WpCmevZMSnKlDBUttmFlN-_QHKrJ2BzlmGx0W/pub?output=csv';
 
   const donorsList = document.getElementById('donorsList');
-  const totalValue = document.getElementById('totalValue');
   const statCount = document.getElementById('statCount');
   const donorsToggle = document.getElementById('donorsToggle');
   const donorsToggleLabel = document.getElementById('donorsToggleLabel');
@@ -2067,17 +2056,6 @@ h2 {
     }).format(amount) + ' ₽';
   }
 
-  function updateProgress(total) {
-    const cappedTotal = Math.min(Math.max(total, 0), GOAL_AMOUNT);
-    const percent = Math.min((Math.max(total, 0) / GOAL_AMOUNT) * 100, 100);
-
-    progressCollected.textContent =
-      `${rubleFormatter.format(cappedTotal)} ₽ собрано`;
-    progressFill.style.width = `${percent}%`;
-    progressTrack.setAttribute('aria-valuenow', String(Math.round(cappedTotal)));
-    progressPercent.textContent = `${Math.floor(percent)}%`;
-  }
-
   function renderDonors() {
     const visibleDonors = donorsExpanded
       ? donorsToShow.slice(0, DONORS_EXPANDED_LIMIT)
@@ -2100,10 +2078,7 @@ h2 {
       `;
     }).join('');
 
-    const hasMoreThanCollapsedLimit =
-      donorsToShow.length > DONORS_COLLAPSED_LIMIT;
-
-    donorsToggle.hidden = !hasMoreThanCollapsedLimit;
+    donorsToggle.hidden = donorsToShow.length <= DONORS_COLLAPSED_LIMIT;
     donorsToggle.setAttribute('aria-expanded', String(donorsExpanded));
     donorsToggleLabel.textContent = donorsExpanded
       ? 'Свернуть список'
@@ -2130,26 +2105,20 @@ h2 {
       const rows = parseCsv(csv.replace(/^\uFEFF/, ''));
 
       if (rows.length < 2) {
-        totalValue.textContent = '0 ₽';
         statCount.textContent = '0';
         updateProgress(0);
-        donorsList.innerHTML =
-          '<tr><td colspan="3">Пока нет записей</td></tr>';
+        donorsList.innerHTML = '<tr><td colspan="3">Пока нет записей</td></tr>';
         donorsToggle.hidden = true;
         return;
       }
 
-      const headers = rows[0].map(header =>
-        header.trim().toLowerCase()
-      );
+      const headers = rows[0].map(header => header.trim().toLowerCase());
 
       const nameIndex = headers.findIndex(header => header.includes('имя'));
       const dateIndex = headers.findIndex(header =>
         header.includes('дата') || header.includes('время')
       );
-      const amountIndex = headers.findIndex(header =>
-        header.includes('сумма')
-      );
+      const amountIndex = headers.findIndex(header => header.includes('сумма'));
 
       if (nameIndex === -1 || dateIndex === -1 || amountIndex === -1) {
         throw new Error(
@@ -2157,49 +2126,45 @@ h2 {
         );
       }
 
-      // Google Таблица содержит записи от старых к новым.
-      // Разворачиваем массив, чтобы последние пожертвования были первыми.
+      // Записи сортируются от новых к старым.
       const validDonations = rows.slice(1)
         .map(row => ({
           name: (row[nameIndex] || '').trim(),
           date: (row[dateIndex] || '').trim(),
-          amountText: (row[amountIndex] || '').trim(),
           amount: parseDonationAmount(row[amountIndex])
         }))
         .filter(item => item.name && item.amount !== null)
         .reverse();
 
+      // Множитель 0.78 оставлен из исходного расчёта.
       const total = validDonations.reduce(
         (sum, item) => sum + item.amount,
         0
       ) * 0.78;
 
-      totalValue.textContent = `${rubleFormatter.format(total)} ₽`;
+      updateProgress(total);
       statCount.textContent =
         new Intl.NumberFormat('ru-RU').format(validDonations.length);
 
-      updateProgress(total);
-
       if (validDonations.length === 0) {
-        donorsList.innerHTML =
-          '<tr><td colspan="3">Пока нет благотворителей</td></tr>';
+        donorsList.innerHTML = '<tr><td colspan="3">Пока нет благотворителей</td></tr>';
         donorsToggle.hidden = true;
         return;
       }
 
-      // В полном списке показываем не более 15 последних благотворителей.
       donorsToShow = validDonations.slice(0, DONORS_EXPANDED_LIMIT);
       donorsExpanded = false;
       renderDonors();
 
     } catch (error) {
       console.error('Не удалось загрузить Google Таблицу:', error);
-      totalValue.textContent = '—';
-      statCount.textContent = '—';
-      progressCollected.textContent = 'Данные временно недоступны';
+
+      progressCollected.textContent = 'Не удалось загрузить';
       progressFill.style.width = '0%';
       progressTrack.setAttribute('aria-valuenow', '0');
       progressPercent.textContent = '—';
+
+      statCount.textContent = '—';
       donorsList.innerHTML =
         '<tr><td colspan="3">Не удалось загрузить список благотворителей.</td></tr>';
       donorsToggle.hidden = true;
