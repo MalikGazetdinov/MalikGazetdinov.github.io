@@ -884,11 +884,7 @@ main {
       lastUpdatedElement.textContent = updatedAt;
 
       if (donations.length === 0) {
-        reportStatusElement.textContent = 'В таблице пока нет записей о пожертвованиях.';
-      } else {
-        reportStatusElement.textContent =
-          `Сумма поступлений рассчитана с коэффициентом ${COLLECTION_COEFFICIENT}. ` +
-          `Остаток рассчитан автоматически: собранная сумма минус расходы.`;
+        reportStatusElement.textContent = 'В базе данных пока нет записей о пожертвованиях.';
       }
 
       console.info('Сводка отчёта:', summary);
