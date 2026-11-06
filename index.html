@@ -1976,13 +1976,18 @@ h2 {
 
   async function loadDonors() {
     try {
-      const response = await fetch(donorsCsvUrl, { cache: 'no-store' });
+      const url = new URL(donorsCsvUrl);
+    url.searchParams.set('_', Date.now());
 
-      if (!response.ok) {
-        throw new Error(`Google вернул HTTP ${response.status}`);
-      }
+    const response = await fetch(url.toString(), {
+      cache: 'no-store'
+    });
 
-      const csv = await response.text();
+    if (!response.ok) {
+      throw new Error(`Google вернул HTTP ${response.status}`);
+    }
+
+    const csv = await response.text();
       const rows = parseCsv(csv.replace(/^\uFEFF/, ''));
 
       if (rows.length < 2) {
