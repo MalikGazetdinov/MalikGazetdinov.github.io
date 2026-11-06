@@ -2018,28 +2018,50 @@ h2 {
         row.some(value => value.trim() !== '')
       );
 
-      const validDonations = donors
-        .map(row => ({
-          row,
-          amount: parseDonationAmount(row[amountIndex])
-        }))
-        .filter(item =>
-          (item.row[nameIndex] || '').trim() !== '' &&
-          item.amount !== null
-        );
+      const validDonations = rows.slice(1)
+  .map(row => ({
+    name: (row[nameIndex] || '').trim(),
+    date: (row[dateIndex] || '').trim(),
+    amountText: (row[amountIndex] || '').trim(),
+    amount: parseDonationAmount(row[amountIndex])
+  }))
+  .filter(item => item.name && item.amount !== null);
 
-      const total = validDonations.reduce(
-        (sum, item) => sum + item.amount,
-        0
-      );
+const total = validDonations.reduce(
+  (sum, item) => sum + item.amount,
+  0
+);
 
-      totalValue.textContent =
-        `${new Intl.NumberFormat('ru-RU', {
-          maximumFractionDigits: 2
-        }).format(total)} ₽`;
+totalValue.textContent =
+  `${new Intl.NumberFormat('ru-RU', {
+    maximumFractionDigits: 2
+  }).format(total)} ₽`;
 
-      statCount.textContent =
-        new Intl.NumberFormat('ru-RU').format(validDonations.length);
+statCount.textContent =
+  new Intl.NumberFormat('ru-RU').format(validDonations.length);
+
+if (validDonations.length === 0) {
+  donorsList.innerHTML =
+    '<tr><td colspan="3">Пока нет записей</td></tr>';
+  return;
+}
+
+donorsList.innerHTML = validDonations.map(({ name, date, amountText }) => {
+  const initial = [...name][0] || '?';
+
+  return `
+    <tr>
+      <td>
+        <span class="donor-name">
+          <span class="donor-avatar">${escapeHtml(initial)}</span>
+          <span class="donor-info"><span>${escapeHtml(name)}</span></span>
+        </span>
+      </td>
+      <td>${escapeHtml(date)}</td>
+      <td>${escapeHtml(amountText)}</td>
+    </tr>
+  `;
+}).join('');
 
       if (!donors.length) {
         donorsList.innerHTML =
