@@ -1511,8 +1511,7 @@ h2 {
             value="https://malikgazetdinov.github.io/nocorrect.htm">
         </div>
 
-        <input name="customerNumber" type="hidden"
-          value="Благотворительность на распространение Ислама">
+        <input name="customerNumber" id="yookassaCustomerNumber" type="hidden" value="">
 
         <div class="ym-payment-btn-block ym-before-line ym-align-space-between">
           <div class="ym-input-icon-rub">
@@ -1866,7 +1865,10 @@ h2 {
 
     customAmount.setCustomValidity('');
     yookassaSum.value = donationValue.toFixed(2);
-    yookassaCustName.value = donorName.value.trim();
+    const donorNameValue = donorName.value.trim() || 'Аноним';
+yookassaCustName.value = donorNameValue;
+document.getElementById('yookassaCustomerNumber').value = donorNameValue;
+
 
     donateButton.disabled = true;
     donateButton.textContent = 'Переход к оплате…';
