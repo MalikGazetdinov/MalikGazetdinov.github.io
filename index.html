@@ -2028,7 +2028,7 @@ document.getElementById('yookassaCustomerNumber').value = donorNameValue;
     amount: parseDonationAmount(row[amountIndex])
   }))
   .filter(item => item.name && item.amount !== null)
-        .reverse();
+  .reverse();
 
 const total = validDonations.reduce(
   (sum, item) => sum + item.amount,
