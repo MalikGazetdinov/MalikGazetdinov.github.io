@@ -526,6 +526,43 @@ a {
   letter-spacing: .06em;
 }
 
+.goal-progress {
+  margin: 14px 2px 18px;
+}
+
+.goal-progress__labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 7px;
+  color: var(--ink-600);
+  font-size: .72rem;
+  font-weight: 700;
+}
+
+.goal-progress__track {
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--sand-100);
+}
+
+.goal-progress__fill {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--emerald-600), var(--gold-400));
+  transition: width .5s ease;
+}
+
+.goal-progress__percent {
+  margin-top: 5px;
+  color: var(--emerald-800);
+  font-size: .75rem;
+  font-weight: 800;
+  text-align: right;
+}
+
 .amounts {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1459,14 +1496,32 @@ h2 {
           <div class="donate-total__value" id="totalValue" aria-live="polite">Загружаем…</div>
         </div>
 
+        <div class="goal-progress">
+          <div class="goal-progress__labels">
+            <span id="progressCollected">0 ₽ собрано</span>
+            <span>из 1 000 000 ₽</span>
+          </div>
+          <div
+            class="goal-progress__track"
+            role="progressbar"
+            aria-label="Прогресс сбора"
+            aria-valuemin="0"
+            aria-valuemax="1000000"
+            aria-valuenow="0"
+            id="progressTrack">
+            <div class="goal-progress__fill" id="progressFill"></div>
+          </div>
+          <div class="goal-progress__percent" id="progressPercent">0%</div>
+        </div>
+
         <div class="donate-stats">
           <div class="donate-stats__item">
             <div class="donate-stats__num" id="statCount" aria-live="polite">…</div>
             <div class="donate-stats__label">Благотворителей</div>
           </div>
           <div class="donate-stats__item">
-            <div class="donate-stats__num">∞</div>
-            <div class="donate-stats__label">Цель</div>
+            <div class="donate-stats__num">1 000 000 ₽</div>
+            <div class="donate-stats__label">Цель сбора</div>
           </div>
         </div>
 
@@ -1922,6 +1977,16 @@ h2 {
       : 'Развернуть текст';
   });
 
+  // Сбор пожертвований и прогресс-бар
+  const GOAL_AMOUNT = 1_000_000;
+  const progressCollected = document.getElementById('progressCollected');
+  const progressTrack = document.getElementById('progressTrack');
+  const progressFill = document.getElementById('progressFill');
+  const progressPercent = document.getElementById('progressPercent');
+  const rubleFormatter = new Intl.NumberFormat('ru-RU', {
+    maximumFractionDigits: 2
+  });
+
   // Загрузка благотворителей и расчёт статистики из опубликованной Google Таблицы
   const donorsCsvUrl =
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vRxAabXWF7N8IzMFsXZ7j4y2q0m-1ft6YJ8NjGCwL-WpCmevZMSnKlDBUttmFlN-_QHKrJ2BzlmGx0W/pub?output=csv';
@@ -1996,43 +2061,55 @@ h2 {
   }
 
   function formatRubles(amount) {
-  return new Intl.NumberFormat('ru-RU', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }).format(amount) + ' ₽';
-}
+    return new Intl.NumberFormat('ru-RU', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(amount) + ' ₽';
+  }
 
-function renderDonors() {
-  const visibleDonors = donorsExpanded
-    ? donorsToShow.slice(0, DONORS_EXPANDED_LIMIT)
-    : donorsToShow.slice(0, DONORS_COLLAPSED_LIMIT);
+  function updateProgress(total) {
+    const cappedTotal = Math.min(Math.max(total, 0), GOAL_AMOUNT);
+    const percent = Math.min((Math.max(total, 0) / GOAL_AMOUNT) * 100, 100);
 
-  donorsList.innerHTML = visibleDonors.map(({ name, date, amount }) => {
-    const initial = [...name][0] || '?';
+    progressCollected.textContent =
+      `${rubleFormatter.format(cappedTotal)} ₽ собрано`;
+    progressFill.style.width = `${percent}%`;
+    progressTrack.setAttribute('aria-valuenow', String(Math.round(cappedTotal)));
+    progressPercent.textContent = `${Math.floor(percent)}%`;
+  }
 
-    return `
-      <tr>
-        <td>
-          <span class="donor-name">
-            <span class="donor-avatar">${escapeHtml(initial)}</span>
-            <span class="donor-info"><span>${escapeHtml(name)}</span></span>
-          </span>
-        </td>
-        <td>${escapeHtml(date)}</td>
-        <td>${formatRubles(amount)}</td>
-      </tr>
-    `;
-  }).join('');
+  function renderDonors() {
+    const visibleDonors = donorsExpanded
+      ? donorsToShow.slice(0, DONORS_EXPANDED_LIMIT)
+      : donorsToShow.slice(0, DONORS_COLLAPSED_LIMIT);
 
-  const hasMoreThanCollapsedLimit =
-    donorsToShow.length > DONORS_COLLAPSED_LIMIT;
+    donorsList.innerHTML = visibleDonors.map(({ name, date, amount }) => {
+      const initial = [...name][0] || '?';
 
-  donorsToggle.hidden = !hasMoreThanCollapsedLimit;
-  donorsToggle.setAttribute('aria-expanded', String(donorsExpanded));
-  donorsToggleLabel.textContent = donorsExpanded
-    ? 'Свернуть список'
-    : 'Развернуть список';
-}
+      return `
+        <tr>
+          <td>
+            <span class="donor-name">
+              <span class="donor-avatar">${escapeHtml(initial)}</span>
+              <span class="donor-info"><span>${escapeHtml(name)}</span></span>
+            </span>
+          </td>
+          <td>${escapeHtml(date)}</td>
+          <td>${formatRubles(amount)}</td>
+        </tr>
+      `;
+    }).join('');
+
+    const hasMoreThanCollapsedLimit =
+      donorsToShow.length > DONORS_COLLAPSED_LIMIT;
+
+    donorsToggle.hidden = !hasMoreThanCollapsedLimit;
+    donorsToggle.setAttribute('aria-expanded', String(donorsExpanded));
+    donorsToggleLabel.textContent = donorsExpanded
+      ? 'Свернуть список'
+      : 'Развернуть список';
+  }
+
   donorsToggle.addEventListener('click', () => {
     donorsExpanded = !donorsExpanded;
     renderDonors();
@@ -2055,6 +2132,7 @@ function renderDonors() {
       if (rows.length < 2) {
         totalValue.textContent = '0 ₽';
         statCount.textContent = '0';
+        updateProgress(0);
         donorsList.innerHTML =
           '<tr><td colspan="3">Пока нет записей</td></tr>';
         donorsToggle.hidden = true;
@@ -2092,17 +2170,15 @@ function renderDonors() {
         .reverse();
 
       const total = validDonations.reduce(
-  (sum, item) => sum + item.amount,
-  0
-) * 0.78;
+        (sum, item) => sum + item.amount,
+        0
+      ) * 0.78;
 
-      totalValue.textContent =
-        `${new Intl.NumberFormat('ru-RU', {
-          maximumFractionDigits: 2
-        }).format(total)} ₽`;
-
+      totalValue.textContent = `${rubleFormatter.format(total)} ₽`;
       statCount.textContent =
         new Intl.NumberFormat('ru-RU').format(validDonations.length);
+
+      updateProgress(total);
 
       if (validDonations.length === 0) {
         donorsList.innerHTML =
@@ -2120,6 +2196,10 @@ function renderDonors() {
       console.error('Не удалось загрузить Google Таблицу:', error);
       totalValue.textContent = '—';
       statCount.textContent = '—';
+      progressCollected.textContent = 'Данные временно недоступны';
+      progressFill.style.width = '0%';
+      progressTrack.setAttribute('aria-valuenow', '0');
+      progressPercent.textContent = '—';
       donorsList.innerHTML =
         '<tr><td colspan="3">Не удалось загрузить список благотворителей.</td></tr>';
       donorsToggle.hidden = true;
