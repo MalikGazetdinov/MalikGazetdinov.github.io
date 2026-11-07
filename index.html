@@ -559,6 +559,19 @@ a {
   text-align: right;
 }
 
+  .goal-progress__remaining {
+  margin-top: 8px;
+  color: var(--ink-600);
+  font-size: .85rem;
+  text-align: right;
+}
+
+.goal-progress__remaining strong {
+  color: var(--emerald-800);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
 .amounts {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1506,6 +1519,9 @@ h2 {
           </div>
 
           <div class="goal-progress__percent" id="progressPercent">0%</div>
+          <div class="goal-progress__remaining">
+  Осталось: <strong id="progressRemaining">—</strong>
+</div>
         </div>
 
         <div class="donate-stats">
@@ -1961,21 +1977,24 @@ h2 {
   const progressTrack = document.getElementById('progressTrack');
   const progressFill = document.getElementById('progressFill');
   const progressPercent = document.getElementById('progressPercent');
+  const progressRemaining = document.getElementById('progressRemaining');
 
   const rubleFormatter = new Intl.NumberFormat('ru-RU', {
     maximumFractionDigits: 2
   });
 
   function updateProgress(total) {
-    const safeTotal = Math.max(Number(total) || 0, 0);
-    const cappedTotal = Math.min(safeTotal, GOAL_AMOUNT);
-    const percent = Math.min((safeTotal / GOAL_AMOUNT) * 100, 100);
+  const safeTotal = Math.max(Number(total) || 0, 0);
+  const cappedTotal = Math.min(safeTotal, GOAL_AMOUNT);
+  const percent = Math.min((safeTotal / GOAL_AMOUNT) * 100, 100);
+  const remaining = Math.max(GOAL_AMOUNT - safeTotal, 0);
 
-    progressCollected.textContent = `${rubleFormatter.format(cappedTotal)} ₽`;
-    progressFill.style.width = `${percent}%`;
-    progressTrack.setAttribute('aria-valuenow', String(Math.round(cappedTotal)));
-    progressPercent.textContent = `${Math.floor(percent)}%`;
-  }
+  progressCollected.textContent = `${rubleFormatter.format(cappedTotal)} ₽`;
+  progressFill.style.width = `${percent}%`;
+  progressTrack.setAttribute('aria-valuenow', String(Math.round(cappedTotal)));
+  progressPercent.textContent = `${Math.floor(percent)}%`;
+  progressRemaining.textContent = `${rubleFormatter.format(remaining)} ₽`;
+}
 
   // Загрузка списка из опубликованной Google Таблицы
   const donorsCsvUrl =
