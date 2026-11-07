@@ -8,28 +8,28 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Amiri&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Amiri&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --emerald-950: #06231a;
-  --emerald-900: #0a3024;
-  --emerald-800: #0e4030;
-  --emerald-700: #14523d;
-  --gold-500: #c9a227;
-  --gold-400: #d9b544;
-  --gold-200: #eed9a0;
-  --sand-50: #faf7f0;
-  --sand-100: #f3ede1;
-  --ink-900: #1c2420;
-  --ink-600: #4b5852;
-  --white: #fff;
+  --bg: #fafaf8;
+  --bg-soft: #f2f4f1;
+  --surface: #ffffff;
+  --ink-900: #171b19;
+  --ink-600: #5f6663;
+  --accent-900: #123a2c;
+  --accent-700: #166b4f;
+  --accent-600: #1e8560;
+  --accent-soft: #e6f3ec;
+  --line: rgba(23, 27, 25, .09);
+  --line-strong: rgba(23, 27, 25, .17);
+  --marker: #d6f1e2;
   --radius-lg: 20px;
   --radius-md: 14px;
-  --shadow-soft: 0 10px 30px rgba(6, 35, 26, .08);
-  --font-display: 'Marcellus', serif;
+  --shadow-soft: 0 8px 24px rgba(23, 27, 25, .05);
+  --font-display: 'Onest', sans-serif;
   --font-arabic: 'Amiri', serif;
-  --font-body: 'Manrope', sans-serif;
+  --font-body: 'Onest', sans-serif;
 }
 
 * {
@@ -47,9 +47,14 @@ body {
   min-width: 320px;
   font-family: var(--font-body);
   color: var(--ink-900);
-  background: var(--sand-50);
+  background: var(--bg);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--marker);
+  color: var(--ink-900);
 }
 
 a {
@@ -65,9 +70,20 @@ a {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: .05;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Cpath d='M40 0L80 40 40 80 0 40Z'/%3E%3Cpath d='M40 14L66 40 40 66 14 40Z'/%3E%3Ccircle cx='40' cy='40' r='6'/%3E%3C/g%3E%3C/svg%3E");
+  opacity: .04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23171b19' stroke-width='1'%3E%3Cpath d='M40 0L80 40 40 80 0 40Z'/%3E%3Cpath d='M40 14L66 40 40 66 14 40Z'/%3E%3Ccircle cx='40' cy='40' r='6'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 80px 80px;
+}
+
+/* Маркер-выделение вместо цветного текста */
+.report-section strong {
+  font-weight: 600;
+  color: inherit;
+  background-image: linear-gradient(104deg, transparent .8%, var(--marker) 2.6%, var(--marker) 96.5%, transparent 99%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: .08em .3em;
+  border-radius: .2em;
 }
 
 /* Шапка */
@@ -75,9 +91,9 @@ a {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(6, 35, 26, .94);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(233, 215, 160, .18);
+  background: rgba(250, 250, 248, .88);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
 }
 
 .header__inner {
@@ -92,7 +108,7 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  color: var(--sand-50);
+  color: var(--ink-900);
   text-decoration: none;
 }
 
@@ -104,10 +120,7 @@ a {
   flex: none;
   overflow: hidden;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--emerald-700), var(--emerald-900));
-  color: var(--gold-400);
-  font-family: var(--font-arabic);
-  font-size: 1.45rem;
+  background: linear-gradient(135deg, var(--accent-600), var(--accent-900));
 }
 
 .logo__mark img {
@@ -118,8 +131,9 @@ a {
 
 .logo__name {
   font-family: var(--font-display);
-  font-size: 1.15rem;
-  letter-spacing: .03em;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -.01em;
 }
 
 .header__nav {
@@ -129,7 +143,7 @@ a {
 }
 
 .header__nav a {
-  color: rgba(250, 247, 240, .82);
+  color: var(--ink-600);
   text-decoration: none;
   font-size: .87rem;
   font-weight: 600;
@@ -137,28 +151,29 @@ a {
 }
 
 .header__nav a:hover {
-  color: var(--gold-400);
+  color: var(--accent-700);
 }
 
 .header__back {
-  color: var(--gold-200);
+  color: var(--accent-700);
   font-size: .85rem;
   font-weight: 700;
   text-decoration: none;
 }
 
 .header__back:hover {
-  color: var(--gold-400);
+  color: var(--accent-600);
 }
 
 /* Верхний блок */
 .page-hero {
   position: relative;
   overflow: hidden;
-  color: var(--sand-50);
+  color: var(--ink-900);
   background:
-    radial-gradient(700px 330px at 85% -15%, rgba(201, 162, 39, .2), transparent 65%),
-    linear-gradient(160deg, var(--emerald-950), var(--emerald-800) 65%, var(--emerald-700));
+    radial-gradient(700px 330px at 85% -15%, rgba(30, 133, 96, .1), transparent 65%),
+    radial-gradient(520px 320px at -6% 120%, rgba(214, 241, 226, .5), transparent 65%),
+    var(--bg);
 }
 
 .page-hero__inner {
@@ -173,7 +188,7 @@ a {
   align-items: center;
   gap: 9px;
   margin-bottom: 13px;
-  color: var(--gold-400);
+  color: var(--accent-700);
   font-size: .75rem;
   font-weight: 800;
   letter-spacing: .22em;
@@ -185,25 +200,27 @@ a {
   content: "";
   width: 26px;
   height: 1px;
-  background: var(--gold-400);
+  background: var(--accent-600);
+  opacity: .5;
 }
 
 .page-hero h1 {
   margin-bottom: 10px;
   font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3.25rem);
-  font-weight: 400;
-  line-height: 1.15;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -.02em;
 }
 
 .page-hero__meta {
-  color: rgba(250, 247, 240, .75);
+  color: var(--ink-600);
   font-size: .9rem;
 }
 
 .page-hero__meta span {
   padding-inline: 7px;
-  color: var(--gold-400);
+  color: var(--accent-600);
 }
 
 /* Основное содержимое */
@@ -216,9 +233,9 @@ main {
   margin-bottom: 22px;
   padding: 30px;
   overflow: hidden;
-  border: 1px solid rgba(20, 82, 61, .09);
+  border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background: var(--white);
+  background: var(--surface);
   box-shadow: var(--shadow-soft);
 }
 
@@ -236,19 +253,21 @@ main {
   place-items: center;
   flex: none;
   border-radius: 50%;
-  background: var(--emerald-800);
-  color: var(--gold-200);
+  background: var(--accent-soft);
+  color: var(--accent-900);
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-weight: 700;
+  font-size: 1rem;
 }
 
 .report-section h2 {
   padding-top: 3px;
-  color: var(--emerald-950);
+  color: var(--ink-900);
   font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 400;
+  font-size: 1.3rem;
+  font-weight: 700;
   line-height: 1.3;
+  letter-spacing: -.01em;
 }
 
 .report-section p {
@@ -258,10 +277,6 @@ main {
 
 .report-section p:last-child {
   margin-bottom: 0;
-}
-
-.report-section strong {
-  color: var(--emerald-900);
 }
 
 .report-list {
@@ -276,7 +291,7 @@ main {
 }
 
 .report-list li::marker {
-  color: var(--gold-500);
+  color: var(--accent-600);
 }
 
 /* Сводка */
@@ -290,15 +305,16 @@ main {
 .stat-card {
   padding: 19px 12px;
   text-align: center;
-  border: 1px solid rgba(20, 82, 61, .09);
+  border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  background: var(--sand-50);
+  background: var(--bg-soft);
 }
 
 .stat-card__value {
-  color: var(--emerald-800);
+  color: var(--accent-900);
   font-family: var(--font-display);
-  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 700;
+  font-size: clamp(1.35rem, 3vw, 1.7rem);
   font-variant-numeric: tabular-nums;
 }
 
@@ -314,9 +330,9 @@ main {
 .report-note {
   margin-top: 15px;
   padding: 13px 16px;
-  border-left: 3px solid var(--gold-500);
+  border-left: 3px solid var(--accent-600);
   border-radius: 0 10px 10px 0;
-  background: var(--sand-100);
+  background: var(--accent-soft);
   color: var(--ink-600);
   font-size: .9rem;
 }
@@ -326,27 +342,27 @@ main {
   width: 100%;
   margin: 18px 0 8px;
   overflow-x: auto;
-  border: 1px solid rgba(20, 82, 61, .1);
+  border: 1px solid var(--line);
   border-radius: var(--radius-md);
 }
 
 .report-table {
   width: 100%;
   border-collapse: collapse;
-  background: var(--white);
+  background: var(--surface);
 }
 
 .report-table th,
 .report-table td {
   padding: 14px 16px;
-  border-bottom: 1px solid rgba(20, 82, 61, .09);
+  border-bottom: 1px solid var(--line);
   text-align: left;
   vertical-align: top;
 }
 
 .report-table th {
-  background: var(--sand-100);
-  color: var(--emerald-900);
+  background: var(--bg-soft);
+  color: var(--ink-900);
   font-size: .72rem;
   font-weight: 800;
   letter-spacing: .1em;
@@ -363,25 +379,25 @@ main {
 }
 
 .report-table .amount {
-  color: var(--emerald-800);
+  color: var(--accent-900);
   font-weight: 700;
   white-space: nowrap;
 }
 
 .blank {
-  color: var(--gold-500);
+  color: var(--accent-700);
   letter-spacing: .04em;
 }
 
 .contact-email {
-  color: var(--emerald-700);
+  color: var(--accent-700);
   font-weight: 700;
-  text-decoration-color: rgba(20, 82, 61, .35);
+  text-decoration-color: rgba(30, 133, 96, .4);
   text-underline-offset: 3px;
 }
 
 .contact-email:hover {
-  color: var(--gold-500);
+  color: var(--accent-600);
 }
 
 /* Подвал */
@@ -389,9 +405,9 @@ main {
   position: relative;
   overflow: hidden;
   padding: 34px 0;
-  border-top: 1px solid rgba(233, 215, 160, .15);
-  background: var(--emerald-950);
-  color: rgba(250, 247, 240, .7);
+  border-top: 1px solid var(--line);
+  background: var(--bg-soft);
+  color: var(--ink-600);
   text-align: center;
   font-size: .83rem;
 }
@@ -406,16 +422,16 @@ main {
 }
 
 .footer strong {
-  color: var(--sand-50);
+  color: var(--ink-900);
 }
 
 .footer a {
-  color: var(--gold-200);
+  color: var(--accent-700);
   text-decoration: none;
 }
 
 .footer a:hover {
-  color: var(--gold-400);
+  color: var(--accent-600);
 }
 
 @media (max-width: 700px) {
@@ -516,9 +532,9 @@ main {
   .report-table tr {
     margin-bottom: 12px;
     overflow: hidden;
-    border: 1px solid rgba(20, 82, 61, .1);
+    border: 1px solid var(--line);
     border-radius: 12px;
-    background: var(--white);
+    background: var(--surface);
   }
 
   .report-table td {
@@ -526,7 +542,7 @@ main {
     grid-template-columns: minmax(105px, .8fr) 1.2fr;
     gap: 12px;
     padding: 11px 13px;
-    border-bottom: 1px solid rgba(20, 82, 61, .08);
+    border-bottom: 1px solid var(--line);
     font-size: .86rem;
     overflow-wrap: anywhere;
   }
