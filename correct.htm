@@ -3,29 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#06231a">
+  <meta name="theme-color" content="#fafaf8">
   <meta name="description" content="Спасибо за пожертвование проекту «Пробуждение уммы».">
   <title>Пожертвование принято — проект «Пробуждение уммы»</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Amiri&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=Amiri&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --emerald-950: #06231a;
-      --emerald-900: #0a3024;
-      --emerald-800: #0e4030;
-      --emerald-700: #14523d;
-      --gold-500: #c9a227;
-      --gold-400: #d9b544;
-      --gold-200: #eed9a0;
-      --sand-50: #faf7f0;
-      --ink-900: #1c2420;
-      --ink-600: #4b5852;
-      --font-display: 'Marcellus', serif;
+      --bg: #fafaf8;
+      --bg-soft: #f2f4f1;
+      --surface: #ffffff;
+      --ink-900: #171b19;
+      --ink-600: #5f6663;
+      --accent-900: #123a2c;
+      --accent-700: #166b4f;
+      --accent-600: #1e8560;
+      --accent-soft: #e6f3ec;
+      --line: rgba(23, 27, 25, .09);
+      --line-strong: rgba(23, 27, 25, .17);
+      --marker: #d6f1e2;
+      --radius-lg: 20px;
+      --shadow-strong: 0 20px 48px rgba(23, 27, 25, .09);
+      --font-display: 'Onest', sans-serif;
       --font-arabic: 'Amiri', serif;
-      --font-body: 'Manrope', sans-serif;
+      --font-body: 'Onest', sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,15 +40,20 @@
       display: flex;
       flex-direction: column;
       color: var(--ink-900);
-      background: var(--sand-50);
+      background: var(--bg);
       font-family: var(--font-body);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
     }
 
+    ::selection {
+      background: var(--marker);
+      color: var(--ink-900);
+    }
+
     .header {
-      background: var(--emerald-950);
-      border-bottom: 1px solid rgba(233, 215, 160, .18);
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
     }
 
     .container {
@@ -62,7 +71,7 @@
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      color: var(--sand-50);
+      color: var(--ink-900);
       text-decoration: none;
     }
 
@@ -72,25 +81,17 @@
       display: grid;
       place-items: center;
       flex: none;
+      overflow: hidden;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--emerald-700), var(--emerald-900));
-      color: var(--gold-400);
-      font: 1.35rem var(--font-arabic);
+      background: linear-gradient(135deg, var(--accent-600), var(--accent-900));
     }
 
     .logo__name {
       display: block;
-      font: 1.35rem var(--font-display);
-      letter-spacing: .04em;
-    }
-
-    .logo__sub {
-      display: block;
-      color: var(--gold-200);
-      font-size: .62rem;
-      font-weight: 600;
-      letter-spacing: .22em;
-      text-transform: uppercase;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: -.01em;
     }
 
     main {
@@ -101,16 +102,17 @@
       overflow: hidden;
       padding: 64px 0;
       background:
-        radial-gradient(900px 500px at 85% -10%, rgba(201, 162, 39, .16), transparent 60%),
-        linear-gradient(160deg, var(--emerald-950), var(--emerald-800) 62%, var(--emerald-700));
+        radial-gradient(760px 420px at 88% -12%, rgba(30, 133, 96, .09), transparent 62%),
+        radial-gradient(560px 360px at -6% 108%, rgba(214, 241, 226, .55), transparent 65%),
+        var(--bg);
     }
 
     .pattern {
       position: absolute;
       inset: 0;
       pointer-events: none;
-      opacity: .05;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1'%3E%3Cpath d='M40 0L80 40 40 80 0 40Z'/%3E%3Cpath d='M40 14L66 40 40 66 14 40Z'/%3E%3Ccircle cx='40' cy='40' r='6'/%3E%3C/g%3E%3C/svg%3E");
+      opacity: .04;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23171b19' stroke-width='1'%3E%3Cpath d='M40 0L80 40 40 80 0 40Z'/%3E%3Cpath d='M40 14L66 40 40 66 14 40Z'/%3E%3Ccircle cx='40' cy='40' r='6'/%3E%3C/g%3E%3C/svg%3E");
       background-size: 80px 80px;
     }
 
@@ -119,10 +121,11 @@
       position: relative;
       z-index: 1;
       padding: 46px 42px;
-      border-top: 4px solid var(--gold-500);
-      border-radius: 20px;
-      background: #fff;
-      box-shadow: 0 24px 60px rgba(6, 35, 26, .22);
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--accent-600);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow-strong);
       text-align: center;
     }
 
@@ -132,17 +135,17 @@
       display: grid;
       place-items: center;
       margin: 0 auto 22px;
-      border: 1px solid rgba(20, 82, 61, .12);
+      border: 1px solid rgba(30, 133, 96, .18);
       border-radius: 50%;
-      background: #edf5ef;
-      color: var(--emerald-700);
+      background: var(--accent-soft);
+      color: var(--accent-700);
     }
 
     .status-icon svg { width: 38px; height: 38px; }
 
     .eyebrow {
       margin-bottom: 10px;
-      color: var(--gold-500);
+      color: var(--accent-700);
       font-size: .75rem;
       font-weight: 800;
       letter-spacing: .22em;
@@ -151,8 +154,12 @@
 
     h1 {
       margin-bottom: 14px;
-      color: var(--emerald-950);
-      font: 400 clamp(2rem, 5vw, 2.7rem)/1.15 var(--font-display);
+      color: var(--ink-900);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 2.6rem);
+      line-height: 1.15;
+      letter-spacing: -.02em;
     }
 
     .message {
@@ -163,8 +170,9 @@
 
     .dua {
       margin-bottom: 26px;
-      color: var(--emerald-800);
-      font: 1.4rem var(--font-arabic);
+      color: var(--accent-900);
+      font-family: var(--font-arabic);
+      font-size: 1.5rem;
     }
 
     .actions {
@@ -182,23 +190,25 @@
       padding: 12px 24px;
       border: 0;
       border-radius: 999px;
-      background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
-      box-shadow: 0 6px 20px rgba(201, 162, 39, .28);
-      color: var(--emerald-950);
+      background: var(--accent-700);
+      box-shadow: 0 6px 18px rgba(22, 107, 79, .22);
+      color: #fff;
       font: 700 .95rem var(--font-body);
       text-decoration: none;
-      transition: transform .2s, box-shadow .2s;
+      transition: transform .2s, box-shadow .2s, background .25s;
     }
 
     .btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(201, 162, 39, .4);
+      background: var(--accent-600);
+      box-shadow: 0 10px 26px rgba(22, 107, 79, .28);
     }
 
     .footer {
       padding: 20px 0;
-      background: var(--emerald-950);
-      color: rgba(250, 247, 240, .65);
+      background: var(--bg-soft);
+      border-top: 1px solid var(--line);
+      color: var(--ink-600);
       text-align: center;
       font-size: .8rem;
     }
